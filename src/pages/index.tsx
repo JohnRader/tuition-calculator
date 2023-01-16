@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1> Home meep</h1>
+      <h1> Home </h1>
       <ul>
         <li>
           <Link href="/onboarding"> Onboarding </Link>

@@ -1,14 +1,14 @@
-import Head from 'next/head'
-import { FormControl, TextField, Typography } from '@mui/material'
-import mui from '@/styles/mui.module.css'
-import styles from '@/styles/home.module.css'
+import Head from 'next/head';
+import { FormControl, TextField, Typography } from '@mui/material';
+import mui from '@/styles/mui.module.css';
+import styles from '@/styles/home.module.css';
 
-export default function Onboarding() {  
+export default function Onboarding() {
   return (
     <>
       <Head>
-        <title>Tuition Calculator</title>
-        <meta name="description" content="Tuition Calculator" />
+        <title>Onboarding</title>
+        <meta name="description" content="Onboarding" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -16,7 +16,7 @@ export default function Onboarding() {
       <main>
         <div className={styles.center}>
           <FormControl sx={{ width: '50ch' }}>
-            <Typography variant='h2'>Enter your info</Typography>
+            <Typography variant="h2">Enter your info</Typography>
             <TextField
               className={mui['form-input']}
               id="first-name"
@@ -32,7 +32,7 @@ export default function Onboarding() {
             <TextField
               className={mui['form-input']}
               id="phone"
-              label="Phone" 
+              label="Phone"
               variant="outlined"
               inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             />
@@ -47,28 +47,28 @@ export default function Onboarding() {
 
         <div className={styles.center}>
           <FormControl sx={{ width: '50ch' }}>
-            <Typography variant='h2'>What state do you currently reside in?</Typography>
+            <Typography variant="h2">What state do you currently reside in?</Typography>
             <TextField
               className={mui['form-input']}
-              id="State"
+              id="state"
               label="State"
               variant="outlined"
             />
           </FormControl>
         </div>
-        
+
         <div className={styles.center}>
           <FormControl sx={{ width: '50ch' }}>
-            <Typography variant='h2'>What University would you like to attend?</Typography>
+            <Typography variant="h2">What University would you like to attend?</Typography>
             <TextField
               className={mui['form-input']}
-              id="State"
-              label="State"
+              id="university"
+              label="University"
               variant="outlined"
             />
           </FormControl>
         </div>
       </main>
     </>
-  )
+  );
 }

@@ -22,7 +22,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ['Raleway', 'sans-serif'].join(','),
+    fontFamily: ['"Raleway"', '"sans-serif"'].join(','),
   },
   components: {
     MuiCssBaseline: {

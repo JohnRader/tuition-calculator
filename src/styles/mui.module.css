@@ -4,9 +4,11 @@
 }
 
 .form-control {
-  height: 100%;
+  height: calc(100vh - 8rem);
+  width: calc(100vw - 12rem);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  overflow: auto;
   justify-content: space-between;
+  align-items: center;
 }

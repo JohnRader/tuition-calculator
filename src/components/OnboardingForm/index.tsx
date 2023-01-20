@@ -51,6 +51,7 @@ export default function OnboardingForm() {
     }
   };
 
+  // TODO: Add form validation and submission
   const submit = () => {
     console.log(form);
   };

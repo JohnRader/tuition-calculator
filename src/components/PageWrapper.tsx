@@ -9,7 +9,7 @@ export default function PageWrapper(props: PageProps) {
   const { page } = props;
 
   return (
-    <main className={`${styles['page-wrapper']} ${styles.center}`}>
+    <main className={`${styles.center} ${styles['page-wrapper']}`}>
       {page}
     </main>
   );

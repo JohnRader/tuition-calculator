@@ -51,10 +51,14 @@ export default function OnboardingForm() {
     }
   };
 
+  const submit = () => {
+    console.log(form);
+  };
+
   return (
     <FormControl className={mui['form-control']}>
       { currentStep() }
-      <FormActions step={step} setStep={setStep} />
+      <FormActions step={step} setStep={setStep} submitForm={submit} />
     </FormControl>
   );
 }

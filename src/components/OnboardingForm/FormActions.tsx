@@ -7,10 +7,12 @@ import { OnboardingStep } from '@/components/OnboardingForm';
 interface FormActionsProps {
   step: number;
   setStep: (step: number) => void;
+  submitForm: () => void;
+
 }
 
 export default function FormActions(props: FormActionsProps) {
-  const { step, setStep } = props;
+  const { step, setStep, submitForm } = props;
 
   const setFormStep = (currentStep: OnboardingStep, action: FormAction) => {
     switch (currentStep) {
@@ -24,7 +26,7 @@ export default function FormActions(props: FormActionsProps) {
 
       case OnboardingStep.SCORES:
         return action === FormAction.BACK
-          ? setStep(OnboardingStep.LOCATION) : null;
+          ? setStep(OnboardingStep.LOCATION) : submitForm();
 
       default:
         return 0;
@@ -43,9 +45,8 @@ export default function FormActions(props: FormActionsProps) {
       <Button
         variant="contained"
         onClick={() => setFormStep(step, FormAction.CONTINUE)}
-        disabled={step === OnboardingStep.SCORES}
       >
-        Continue
+        { step === OnboardingStep.SCORES ? 'Submit' : 'Continue' }
       </Button>
     </div>
   );

@@ -1,7 +1,8 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import OnboardingForm from '@/components/OnboardingForm';
+import PageWrapper from '@/components/PageWrapper';
 
-export default function Home() {
+export default function Root() {
   return (
     <>
       <Head>
@@ -11,12 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1> Home </h1>
-      <ul>
-        <li>
-          <Link href="/onboarding"> Onboarding </Link>
-        </li>
-      </ul>
+      <PageWrapper page={<OnboardingForm />} />
     </>
   );
 }

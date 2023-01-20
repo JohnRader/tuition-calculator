@@ -19,6 +19,7 @@ export default function OnboardingForm() {
   const [form, setForm] = useState<OnboardingFormModel>({
     userInfo: {
       firstName: '',
+      middleName: '',
       lastName: '',
       phone: 0,
       email: '',

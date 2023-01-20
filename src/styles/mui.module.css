@@ -1,11 +1,31 @@
-.text-field {
-  min-width: 380px;
-  max-width: 500px;
+.text-field--sm {
+  width: 380px;
+}
+
+.text-field--md {
+  width: 500px;
+}
+
+.text-field--lg {
+  width: 600px;
+}
+
+.text-field fieldset {
+  border: rgb(var(--primary-rgb)) 4px solid;
+  border-radius: 25px;
+  background-color: rgb(var(--primary-rgb), 0.1);
+}
+
+.text-field label {
+  color: rgb(var(--primary-rgb));
+}
+
+.typography {
+  margin-bottom: 2rem;
 }
 
 .form-control {
   height: calc(100vh - 8rem);
-  width: calc(100vw - 12rem);
   display: flex;
   flex-direction: column;
   overflow: auto;

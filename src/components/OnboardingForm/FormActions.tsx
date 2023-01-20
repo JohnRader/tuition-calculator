@@ -36,7 +36,8 @@ export default function FormActions(props: FormActionsProps) {
   return (
     <div className={styles['form-actions']}>
       <Button
-        variant="contained"
+        variant="outlined"
+        size="large"
         onClick={() => setFormStep(step, FormAction.BACK)}
         disabled={step === OnboardingStep.USER_INFO}
       >
@@ -44,6 +45,7 @@ export default function FormActions(props: FormActionsProps) {
       </Button>
       <Button
         variant="contained"
+        size="large"
         onClick={() => setFormStep(step, FormAction.CONTINUE)}
       >
         { step === OnboardingStep.SCORES ? 'Submit' : 'Continue' }

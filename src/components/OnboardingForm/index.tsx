@@ -1,56 +1,50 @@
 import { FormControl } from '@mui/material';
 import { useState } from 'react';
-import mui from '@/styles/mui.module.css';
+import styles from '@/styles/index.module.css';
 
 import FormActions from '@/components/OnboardingForm/FormActions';
-import UserInfo from '@/components/OnboardingForm/UserInfo';
 import Location from '@/components/OnboardingForm/Location';
 import Scores from '@/components/OnboardingForm/Scores';
 
 import type { OnboardingFormModel } from '@/types';
 
 export enum OnboardingStep {
-  USER_INFO,
   LOCATION,
   SCORES,
 }
 
+interface FormStepProps {
+  step: OnboardingStep;
+  form: OnboardingFormModel;
+  setForm: (form: OnboardingFormModel) => void;
+}
+
+function FormStep(props: FormStepProps) {
+  const { step, form, setForm } = props;
+
+  switch (step) {
+    case OnboardingStep.LOCATION:
+      return <Location form={form} setForm={setForm} />;
+
+    case OnboardingStep.SCORES:
+      return <Scores form={form} setForm={setForm} />;
+
+    default:
+      return <Location form={form} setForm={setForm} />;
+  }
+}
+
 export default function OnboardingForm() {
   const [form, setForm] = useState<OnboardingFormModel>({
-    userInfo: {
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      phone: 0,
-      email: '',
-    },
-    location: {
-      state: '',
-      university: '',
-      budget: 0,
-    },
-    scores: {
-      major: '',
-    },
+    state: '',
+    university: '',
+    budget: 0,
+    gpa: 0,
+    act_sat: 0,
+    major: '',
   });
 
-  const [step, setStep] = useState<OnboardingStep>(OnboardingStep.USER_INFO);
-
-  const currentStep = () => {
-    switch (step) {
-      case OnboardingStep.USER_INFO:
-        return <UserInfo form={form} setForm={setForm} />;
-
-      case OnboardingStep.LOCATION:
-        return <Location form={form} setForm={setForm} />;
-
-      case OnboardingStep.SCORES:
-        return <Scores form={form} setForm={setForm} />;
-
-      default:
-        return <UserInfo form={form} setForm={setForm} />;
-    }
-  };
+  const [step, setStep] = useState<OnboardingStep>(OnboardingStep.LOCATION);
 
   // TODO: Add form validation and submission
   const submit = () => {
@@ -58,9 +52,11 @@ export default function OnboardingForm() {
   };
 
   return (
-    <FormControl className={mui['form-control']}>
-      { currentStep() }
+    <div className={styles['form-wrapper']}>
+      <FormControl className={styles['onboarding-form']}>
+        <FormStep step={step} form={form} setForm={setForm} />
+      </FormControl>
       <FormActions step={step} setStep={setStep} submitForm={submit} />
-    </FormControl>
+    </div>
   );
 }

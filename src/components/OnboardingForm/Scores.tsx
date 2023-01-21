@@ -13,15 +13,15 @@ enum ScoresStepInput {
 function Header(input: ScoresStepInput) {
   const headers = {
     [ScoresStepInput.GPA]: (
-      <Typography variant="h4" className={mui.typography}>
-        What is you
+      <Typography variant="h4" gutterBottom>
+        What is your
         {' '}
         <strong>GPA</strong>
         ?
       </Typography>),
     [ScoresStepInput.ACT_SAT]: (
-      <Typography variant="h4" className={mui.typography}>
-        What is you
+      <Typography variant="h4" gutterBottom>
+        What is your
         {' '}
         <strong>ACT/SAT</strong>
         {' '}
@@ -29,10 +29,10 @@ function Header(input: ScoresStepInput) {
       </Typography>
     ),
     [ScoresStepInput.MAJOR]: (
-      <Typography variant="h4" className={mui.typography}>
+      <Typography variant="h4" gutterBottom>
         What would you like to
         {' '}
-        <strong>Major</strong>
+        <strong>major</strong>
         {' '}
         in?
       </Typography>
@@ -65,7 +65,7 @@ export default function Scores(props: OnboardingFormProps) {
           label="GPA"
           variant="outlined"
           onChange={(e) => setForm(
-            { ...form, scores: { ...form.scores, gpa: Number(e.target.value) } },
+            { ...form, gpa: Number(e.target.value) },
           )}
         />
       </div>
@@ -78,7 +78,7 @@ export default function Scores(props: OnboardingFormProps) {
           label="ACT/SAT Score"
           variant="outlined"
           onChange={(e) => setForm(
-            { ...form, scores: { ...form.scores, act_sat: Number(e.target.value) } },
+            { ...form, act_sat: Number(e.target.value) },
           )}
         />
       </div>
@@ -91,7 +91,7 @@ export default function Scores(props: OnboardingFormProps) {
           label="Major"
           variant="outlined"
           onChange={(e) => setForm(
-            { ...form, scores: { ...form.scores, major: e.target.value } },
+            { ...form, major: e.target.value },
           )}
         />
       </div>

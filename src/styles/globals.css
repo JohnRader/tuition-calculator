@@ -1,9 +1,12 @@
 :root {
   --max-width: 1100px;
-  --border-radius: 12px;
+  --border-radius: 16px;
 
   /* Colors */
   --primary-rgb: 151, 122, 234;
+  --primary-rgb-dark: 93, 63, 106;
+  --primary-rgb-light: 192, 175, 242;
+
   --secondary-rgb: 245, 237, 240;
   --success-rgb: 93, 162, 113;
   --warning-rgb: 242, 187, 5;
@@ -43,6 +46,8 @@ body {
   max-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -58,6 +63,12 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+#__next {
+  flex: 1 1 auto;
+  flex-direction: column;
+  display: flex;
 }
 
 strong {

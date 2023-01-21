@@ -3,13 +3,14 @@ import styles from '@/styles/index.module.css';
 
 interface PageProps {
   page: ReactNode;
+  classes: string;
 }
 
 export default function PageWrapper(props: PageProps) {
-  const { page } = props;
+  const { page, classes } = props;
 
   return (
-    <main className={`${styles.center} ${styles['page-wrapper']}`}>
+    <main className={`${styles['page-wrapper']} ${classes}`}>
       {page}
     </main>
   );

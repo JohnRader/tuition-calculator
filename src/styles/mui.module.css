@@ -1,34 +1,16 @@
 .text-field--sm {
-  width: 380px;
+  max-width: 380px;
 }
 
 .text-field--md {
-  width: 500px;
+  max-width: 500px;
 }
 
 .text-field--lg {
-  width: 600px;
+  max-width: 600px;
 }
 
-.text-field fieldset {
-  border: rgb(var(--primary-rgb)) 4px solid;
-  border-radius: 25px;
-  background-color: rgb(var(--primary-rgb), 0.1);
-}
+/* Mobile */
+@media (max-width: 700px) {
 
-.text-field label {
-  color: rgb(var(--primary-rgb));
-}
-
-.typography {
-  margin-bottom: 2rem;
-}
-
-.form-control {
-  height: calc(100vh - 8rem);
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  justify-content: space-between;
-  align-items: center;
 }

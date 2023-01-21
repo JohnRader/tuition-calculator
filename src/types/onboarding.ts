@@ -1,27 +1,10 @@
-export interface UserInfo {
-  firstName: string;
-  middleName?: string;
-  lastName: string;
-  phone: number;
-  email: string;
-}
-
-export interface Location {
+export interface OnboardingFormModel {
   state: string;
   university: string;
   budget: number;
-}
-
-export interface Scores {
   major: string;
   gpa?: number;
   act_sat?: number;
-}
-
-export interface OnboardingFormModel {
-  userInfo: UserInfo;
-  location: Location;
-  scores: Scores;
 }
 
 export interface OnboardingFormProps {

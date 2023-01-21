@@ -13,26 +13,26 @@ enum LocationStepInput {
 function Header(input: LocationStepInput) {
   const headers = {
     [LocationStepInput.STATE]: (
-      <Typography variant="h4" className={mui.typography}>
+      <Typography variant="h4" gutterBottom>
         What
         {' '}
-        <strong>State</strong>
+        <strong>state</strong>
         {' '}
         do you currently reside in?
       </Typography>),
     [LocationStepInput.UNIVERSITY]: (
-      <Typography variant="h4" className={mui.typography}>
-        What
+      <Typography variant="h4" gutterBottom>
+        Which
         {' '}
-        <strong>University</strong>
+        <strong>university</strong>
         {' '}
         would you like to attend?
       </Typography>),
     [LocationStepInput.BUDGET]: (
-      <Typography variant="h4" className={mui.typography}>
-        What is you estimated yearly
+      <Typography variant="h4" gutterBottom>
+        What is your estimated annual
         {' '}
-        <strong>Budget</strong>
+        <strong>budget</strong>
         ?
       </Typography>),
   };
@@ -63,7 +63,7 @@ export default function Location(props: OnboardingFormProps) {
           label="State"
           variant="outlined"
           onChange={(e) => setForm(
-            { ...form, location: { ...form.location, state: e.target.value } },
+            { ...form, state: e.target.value },
           )}
         />
       </div>
@@ -76,7 +76,7 @@ export default function Location(props: OnboardingFormProps) {
           label="University"
           variant="outlined"
           onChange={(e) => setForm(
-            { ...form, location: { ...form.location, university: e.target.value } },
+            { ...form, university: e.target.value },
           )}
         />
       </div>
@@ -90,7 +90,7 @@ export default function Location(props: OnboardingFormProps) {
           label="Budget"
           variant="outlined"
           onChange={(e) => setForm(
-            { ...form, location: { ...form.location, university: e.target.value } },
+            { ...form, budget: Number(e.target.value) },
           )}
         />
       </div>

@@ -1,4 +1,5 @@
-import { Button } from '@mui/material';
+import { Button, StepIcon } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import styles from '@/styles/index.module.css';
 
 import { FormAction } from '@/types';
@@ -16,13 +17,9 @@ export default function FormActions(props: FormActionsProps) {
 
   const setFormStep = (currentStep: OnboardingStep, action: FormAction) => {
     switch (currentStep) {
-      case OnboardingStep.USER_INFO:
-        return action === FormAction.BACK
-          ? null : setStep(OnboardingStep.LOCATION);
-
       case OnboardingStep.LOCATION:
         return action === FormAction.BACK
-          ? setStep(OnboardingStep.USER_INFO) : setStep(OnboardingStep.SCORES);
+          ? null : setStep(OnboardingStep.SCORES);
 
       case OnboardingStep.SCORES:
         return action === FormAction.BACK
@@ -39,16 +36,17 @@ export default function FormActions(props: FormActionsProps) {
         variant="outlined"
         size="large"
         onClick={() => setFormStep(step, FormAction.BACK)}
-        disabled={step === OnboardingStep.USER_INFO}
+        disabled={step === OnboardingStep.LOCATION}
       >
         Back
       </Button>
       <Button
         variant="contained"
         size="large"
+        endIcon={step === OnboardingStep.SCORES ? <ArrowForwardIcon /> : <StepIcon icon="1/2" />}
         onClick={() => setFormStep(step, FormAction.CONTINUE)}
       >
-        { step === OnboardingStep.SCORES ? 'Submit' : 'Continue' }
+        { step === OnboardingStep.SCORES ? 'Generate My Report' : 'Continue' }
       </Button>
     </div>
   );

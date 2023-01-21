@@ -4,9 +4,11 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: '#977AEA',
+      dark: '#5D3F6A',
+      light: '#C0AFF2',
     },
     secondary: {
-      main: '#F5EDF0',
+      main: '#CAD7DD',
     },
     success: {
       main: '#5DA271',
@@ -23,5 +25,32 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: ['"Raleway"', '"sans-serif"'].join(','),
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& label.Mui-focused': {
+            color: 'rgb(var(--primary-rgb))',
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: 'rgb(var(--primary-rgb))',
+          },
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              border: 'rgb(var(--primary-rgb-light)) 3px solid',
+              'border-radius': '16px',
+              'background-color': 'rgb(var(--primary-rgb-light), 0.1)',
+            },
+            '&:hover fieldset': {
+              borderColor: 'rgb(var(--primary-rgb))',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: 'rgb(var(--primary-rgb))',
+            },
+          },
+        },
+      },
+    },
   },
 });

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import OnboardingForm from '@/components/OnboardingForm';
 import PageWrapper from '@/components/PageWrapper';
+import styles from '@/styles/index.module.css';
 
 export default function Root() {
   return (
@@ -12,7 +13,10 @@ export default function Root() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageWrapper page={<OnboardingForm />} />
+      <PageWrapper
+        page={<OnboardingForm />}
+        classes={styles['onboarding-page']}
+      />
     </>
   );
 }

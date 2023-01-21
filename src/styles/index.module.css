@@ -103,6 +103,10 @@
     flex-direction: column;
     gap: 2rem;
   }
+
+  .form-button {
+    width: 100%;
+  }
 }
 
 /* Tablet and Smaller Desktop */

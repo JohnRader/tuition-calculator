@@ -24,6 +24,9 @@ export const theme = createTheme({
     },
   },
   typography: {
+    h4: {
+      fontWeight: 700,
+    },
     fontFamily: ['"Raleway"', '"sans-serif"'].join(','),
   },
   components: {
@@ -38,8 +41,8 @@ export const theme = createTheme({
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              border: 'rgb(var(--primary-rgb-light)) 3px solid',
-              'border-radius': '16px',
+              border: 'rgb(var(--primary-rgb-light)) 4px solid',
+              'border-radius': '25px',
               'background-color': 'rgb(var(--primary-rgb-light), 0.1)',
             },
             '&:hover fieldset': {

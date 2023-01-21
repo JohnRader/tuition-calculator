@@ -1,4 +1,6 @@
-import { TextField, Typography } from '@mui/material';
+import {
+  TextField, Typography, Slider, Box,
+} from '@mui/material';
 import { OnboardingFormProps } from '@/types';
 
 import mui from '@/styles/mui.module.css';
@@ -10,7 +12,7 @@ enum LocationStepInput {
   BUDGET = 'budget',
 }
 
-function Header(input: LocationStepInput) {
+function Header({ input }: { input: LocationStepInput }) {
   const headers = {
     [LocationStepInput.STATE]: (
       <Typography variant="h4" gutterBottom>
@@ -53,10 +55,16 @@ function classes(input: LocationStepInput) {
 export default function Location(props: OnboardingFormProps) {
   const { form, setForm } = props;
 
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    if (typeof newValue === 'number') {
+      setForm({ ...form, budget: newValue });
+    }
+  };
+
   return (
     <div className={styles.form}>
       <div className={styles['form-input']}>
-        {Header(LocationStepInput.STATE)}
+        <Header input={LocationStepInput.STATE} />
         <TextField
           className={classes(LocationStepInput.STATE)}
           id={LocationStepInput.STATE}
@@ -69,7 +77,7 @@ export default function Location(props: OnboardingFormProps) {
       </div>
 
       <div className={styles['form-input']}>
-        {Header(LocationStepInput.UNIVERSITY)}
+        <Header input={LocationStepInput.UNIVERSITY} />
         <TextField
           className={classes(LocationStepInput.UNIVERSITY)}
           id={LocationStepInput.UNIVERSITY}
@@ -82,9 +90,33 @@ export default function Location(props: OnboardingFormProps) {
       </div>
 
       <div className={styles['form-input']}>
-        {/* TODO: Change to slider */}
-        {Header(LocationStepInput.BUDGET)}
-        <TextField
+        <Header input={LocationStepInput.BUDGET} />
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyItems: 'center',
+          gap: '2rem',
+        }}
+        >
+          <Slider
+            value={typeof form.budget === 'number' ? form.budget : 10000}
+            onChange={handleSliderChange}
+            aria-labelledby="budget-slider"
+            step={100}
+            max={100000}
+            valueLabelDisplay="auto"
+          />
+          <Typography
+            id="budget-slider"
+            gutterBottom
+            variant="h2"
+          >
+            {(form.budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </Typography>
+        </Box>
+
+        {/* <TextField
           className={classes(LocationStepInput.BUDGET)}
           id={LocationStepInput.BUDGET}
           label="Budget"
@@ -92,7 +124,7 @@ export default function Location(props: OnboardingFormProps) {
           onChange={(e) => setForm(
             { ...form, budget: Number(e.target.value) },
           )}
-        />
+        /> */}
       </div>
     </div>
   );

@@ -33,6 +33,7 @@ export default function FormActions(props: FormActionsProps) {
   return (
     <div className={styles['form-actions']}>
       <Button
+        className={styles['form-button']}
         variant="outlined"
         size="large"
         onClick={() => setFormStep(step, FormAction.BACK)}
@@ -41,12 +42,13 @@ export default function FormActions(props: FormActionsProps) {
         Back
       </Button>
       <Button
+        className={styles['form-button']}
         variant="contained"
         size="large"
         endIcon={step === OnboardingStep.SCORES ? <ArrowForwardIcon /> : <StepIcon icon="1/2" />}
         onClick={() => setFormStep(step, FormAction.CONTINUE)}
       >
-        { step === OnboardingStep.SCORES ? 'Generate My Report' : 'Continue' }
+        { step === OnboardingStep.SCORES ? 'Generate My Report' : 'Next' }
       </Button>
     </div>
   );

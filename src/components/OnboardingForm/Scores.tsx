@@ -1,8 +1,9 @@
-import { TextField, Typography } from '@mui/material';
-import { OnboardingFormProps } from '@/types';
+import { TextField, Typography, Chip } from '@mui/material';
+import type { OnboardingFormProps } from '@/types';
 
 import mui from '@/styles/mui.module.css';
 import styles from '@/styles/index.module.css';
+import { theme } from '@/styles/theme';
 
 enum ScoresStepInput {
   GPA = 'gpa',
@@ -10,7 +11,7 @@ enum ScoresStepInput {
   MAJOR = 'major',
 }
 
-function Header(input: ScoresStepInput) {
+function Header({ input }: { input: ScoresStepInput }) {
   const headers = {
     [ScoresStepInput.GPA]: (
       <Typography variant="h4" gutterBottom>
@@ -58,7 +59,18 @@ export default function Scores(props: OnboardingFormProps) {
   return (
     <div className={styles.form}>
       <div className={styles['form-input']}>
-        {Header(ScoresStepInput.GPA)}
+        <Chip
+          sx={{
+            width: '120px',
+            color: 'black',
+            backgroundColor: 'rgb(var(--primary-rgb), .4)',
+            marginBottom: theme.spacing(1),
+          }}
+          size="small"
+          label="Optional"
+          color="primary"
+        />
+        <Header input={ScoresStepInput.GPA} />
         <TextField
           className={classes(ScoresStepInput.GPA)}
           id={ScoresStepInput.GPA}
@@ -71,7 +83,18 @@ export default function Scores(props: OnboardingFormProps) {
       </div>
 
       <div className={styles['form-input']}>
-        {Header(ScoresStepInput.ACT_SAT)}
+        <Chip
+          sx={{
+            width: '120px',
+            color: 'black',
+            backgroundColor: 'rgb(var(--primary-rgb), .4)',
+            marginBottom: theme.spacing(1),
+          }}
+          size="small"
+          label="Optional"
+          color="primary"
+        />
+        <Header input={ScoresStepInput.ACT_SAT} />
         <TextField
           className={classes(ScoresStepInput.ACT_SAT)}
           id={ScoresStepInput.ACT_SAT}
@@ -84,7 +107,18 @@ export default function Scores(props: OnboardingFormProps) {
       </div>
 
       <div className={styles['form-input']}>
-        {Header(ScoresStepInput.MAJOR)}
+        <Chip
+          sx={{
+            width: '120px',
+            color: 'black',
+            backgroundColor: 'rgb(var(--primary-rgb), .4)',
+            marginBottom: theme.spacing(1),
+          }}
+          size="small"
+          label="Optional"
+          color="primary"
+        />
+        <Header input={ScoresStepInput.MAJOR} />
         <TextField
           className={classes(ScoresStepInput.MAJOR)}
           id={ScoresStepInput.MAJOR}

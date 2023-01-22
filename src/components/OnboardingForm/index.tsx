@@ -1,7 +1,7 @@
 import { FormControl } from '@mui/material';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from '@/styles/index.module.css';
-
 import FormActions from '@/components/OnboardingForm/FormActions';
 import Location from '@/components/OnboardingForm/Location';
 import Scores from '@/components/OnboardingForm/Scores';
@@ -35,6 +35,7 @@ function FormStep(props: FormStepProps) {
 }
 
 export default function OnboardingForm() {
+  const router = useRouter();
   const [form, setForm] = useState<OnboardingFormModel>({
     state: '',
     university: '',
@@ -49,6 +50,7 @@ export default function OnboardingForm() {
   // TODO: Add form validation and submission
   const submit = () => {
     console.log(form);
+    router.push('/report');
   };
 
   return (

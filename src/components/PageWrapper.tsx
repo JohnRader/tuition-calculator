@@ -3,7 +3,7 @@ import styles from '@/styles/index.module.css';
 
 interface PageProps {
   page: ReactNode;
-  classes: string;
+  classes?: string;
 }
 
 export default function PageWrapper(props: PageProps) {
@@ -15,3 +15,7 @@ export default function PageWrapper(props: PageProps) {
     </main>
   );
 }
+
+PageWrapper.defaultProps = {
+  classes: '',
+};

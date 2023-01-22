@@ -3,7 +3,7 @@ import OnboardingForm from '@/components/OnboardingForm';
 import PageWrapper from '@/components/PageWrapper';
 import styles from '@/styles/index.module.css';
 
-export default function Root() {
+export default function RootPage() {
   return (
     <>
       <Head>

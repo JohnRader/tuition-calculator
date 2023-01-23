@@ -112,7 +112,7 @@ export default function AppHeader() {
 
   return (
     <>
-      <AppBar sx={{ height: '64px' }} position="static">
+      <AppBar sx={{ height: 'var(--app-header-height)' }} position="static">
         <Container maxWidth="lg">
           <Toolbar>
             <IconButton

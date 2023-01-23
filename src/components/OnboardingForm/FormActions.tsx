@@ -42,6 +42,7 @@ export default function FormActions(props: FormActionsProps) {
         xs: 'column',
         sm: 'row',
       },
+      padding: '2rem 0',
     }}
     >
       <Button

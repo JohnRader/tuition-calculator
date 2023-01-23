@@ -56,11 +56,10 @@ export default function Location(props: OnboardingFormProps) {
           gap: '2rem',
           padding: {
             xs: '1rem',
-            md: '2rem',
-            lg: '3rem',
+            md: '0',
           },
           width: {
-            xs: '100%',
+            xs: '300px',
             sm: '500px',
             md: '600px',
           },
@@ -75,7 +74,6 @@ export default function Location(props: OnboardingFormProps) {
           />
           <Typography
             id={OnboardingFormInputs.BUDGET}
-            gutterBottom
             variant="h2"
           >
             {formatCurrency(form.budget)}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { FormControl, Grid, Box } from '@mui/material';
 
@@ -76,6 +76,12 @@ export default function OnboardingForm() {
 
   const [step, setStep] = useState<OnboardingFormStep>(OnboardingFormStep.LOCATION);
 
+  useEffect(() => {
+    const page = document.getElementById('page-container');
+
+    page?.scrollTo({ top: 0 });
+  }, [step]);
+
   // TODO: Add form validation and submission
   const submit = () => {
     console.log(form);
@@ -83,16 +89,15 @@ export default function OnboardingForm() {
   };
 
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      padding: '2rem 0',
-      gap: '3rem',
-    }}
+    <Box
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
     >
-      <FormControl>
+      <FormControl sx={{ paddingTop: '2rem' }}>
         <ProgressBar steps={steps} currentStep={step} optionalSteps={optionalSteps} />
         <Grid container spacing={6}>
           <FormStep step={step} form={form} setForm={setForm} />

@@ -1,4 +1,7 @@
 import { ReactNode } from 'react';
+import { Container } from '@mui/material';
+import AppHeader from '@/components/AppHeader';
+
 import styles from '@/styles/index.module.css';
 
 interface PageProps {
@@ -10,9 +13,15 @@ export default function PageWrapper(props: PageProps) {
   const { page, classes } = props;
 
   return (
-    <main className={`${styles['page-wrapper']} ${classes}`}>
-      {page}
-    </main>
+    <>
+      <AppHeader />
+
+      <main className={`${styles['page-wrapper']} ${classes}`}>
+        <Container maxWidth="lg" sx={{ display: 'flex', flex: '1' }}>
+          {page}
+        </Container>
+      </main>
+    </>
   );
 }
 

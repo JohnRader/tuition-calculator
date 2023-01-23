@@ -1,56 +1,12 @@
 import {
-  TextField, Typography, Slider, Box,
+  TextField, Typography, Slider, Box, Grid,
 } from '@mui/material';
-import { OnboardingFormProps } from '@/types';
 
-import mui from '@/styles/mui.module.css';
-import styles from '@/styles/index.module.css';
+import QuestionHeader from '@/components/OnboardingForm/QuestionHeader';
+import { classes, OnboardingFormInputs } from '@/components/OnboardingForm';
+import { formatCurrency } from '@/utils';
 
-enum LocationStepInput {
-  STATE = 'state',
-  UNIVERSITY = 'university',
-  BUDGET = 'budget',
-}
-
-function Header({ input }: { input: LocationStepInput }) {
-  const headers = {
-    [LocationStepInput.STATE]: (
-      <Typography variant="h4" gutterBottom>
-        What
-        {' '}
-        <strong>state</strong>
-        {' '}
-        do you currently reside in?
-      </Typography>),
-    [LocationStepInput.UNIVERSITY]: (
-      <Typography variant="h4" gutterBottom>
-        Which
-        {' '}
-        <strong>university</strong>
-        {' '}
-        would you like to attend?
-      </Typography>),
-    [LocationStepInput.BUDGET]: (
-      <Typography variant="h4" gutterBottom>
-        What is your estimated annual
-        {' '}
-        <strong>budget</strong>
-        ?
-      </Typography>),
-  };
-
-  return headers[input];
-}
-
-function classes(input: LocationStepInput) {
-  const inputClasses: Record<LocationStepInput, string> = {
-    [LocationStepInput.STATE]: `${mui['text-field']} ${mui['text-field--sm']}`,
-    [LocationStepInput.UNIVERSITY]: `${mui['text-field']} ${mui['text-field--lg']}`,
-    [LocationStepInput.BUDGET]: `${mui['text-field']} ${mui['text-field--sm']}`,
-  };
-
-  return inputClasses[input];
-}
+import type { OnboardingFormProps } from '@/types';
 
 export default function Location(props: OnboardingFormProps) {
   const { form, setForm } = props;
@@ -62,70 +18,70 @@ export default function Location(props: OnboardingFormProps) {
   };
 
   return (
-    <div className={styles.form}>
-      <div className={styles['form-input']}>
-        <Header input={LocationStepInput.STATE} />
+    <>
+      <Grid item xs={12}>
+        <QuestionHeader questionId={OnboardingFormInputs.STATE} />
         <TextField
-          className={classes(LocationStepInput.STATE)}
-          id={LocationStepInput.STATE}
+          id={OnboardingFormInputs.STATE}
+          className={classes(OnboardingFormInputs.STATE)}
+          fullWidth
           label="State"
           variant="outlined"
           onChange={(e) => setForm(
             { ...form, state: e.target.value },
           )}
         />
-      </div>
+      </Grid>
 
-      <div className={styles['form-input']}>
-        <Header input={LocationStepInput.UNIVERSITY} />
+      <Grid item xs={12}>
+        <QuestionHeader questionId={OnboardingFormInputs.UNIVERSITY} />
         <TextField
-          className={classes(LocationStepInput.UNIVERSITY)}
-          id={LocationStepInput.UNIVERSITY}
+          id={OnboardingFormInputs.UNIVERSITY}
+          className={classes(OnboardingFormInputs.UNIVERSITY)}
+          fullWidth
           label="University"
           variant="outlined"
           onChange={(e) => setForm(
             { ...form, university: e.target.value },
           )}
         />
-      </div>
+      </Grid>
 
-      <div className={styles['form-input']}>
-        <Header input={LocationStepInput.BUDGET} />
+      <Grid item xs={12}>
+        <QuestionHeader questionId={OnboardingFormInputs.BUDGET} />
         <Box sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyItems: 'center',
           gap: '2rem',
+          padding: {
+            xs: '1rem',
+            md: '2rem',
+            lg: '3rem',
+          },
+          width: {
+            xs: '100%',
+            sm: '500px',
+            md: '600px',
+          },
         }}
         >
           <Slider
             value={typeof form.budget === 'number' ? form.budget : 10000}
             onChange={handleSliderChange}
-            aria-labelledby="budget-slider"
-            step={100}
+            aria-labelledby={OnboardingFormInputs.BUDGET}
+            step={1000}
             max={100000}
-            valueLabelDisplay="auto"
           />
           <Typography
-            id="budget-slider"
+            id={OnboardingFormInputs.BUDGET}
             gutterBottom
             variant="h2"
           >
-            {(form.budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+            {formatCurrency(form.budget)}
           </Typography>
         </Box>
-
-        {/* <TextField
-          className={classes(LocationStepInput.BUDGET)}
-          id={LocationStepInput.BUDGET}
-          label="Budget"
-          variant="outlined"
-          onChange={(e) => setForm(
-            { ...form, budget: Number(e.target.value) },
-          )}
-        /> */}
-      </div>
-    </div>
+      </Grid>
+    </>
   );
 }

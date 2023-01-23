@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
 
-export const theme = createTheme({
+const themeBase = createTheme({
   palette: {
     primary: {
       main: '#977AEA',
@@ -24,12 +24,66 @@ export const theme = createTheme({
     },
   },
   typography: {
-    h4: {
-      fontWeight: 700,
-    },
-    fontFamily: ['"Raleway"', '"sans-serif"'].join(','),
+    fontFamily: ['Raleway', 'arial'].join(','),
   },
+});
+
+const { breakpoints } = themeBase;
+
+export const theme = {
+  ...themeBase,
   components: {
+    MuiTypography: {
+      styleOverrides: {
+        h1: {
+          fontSize: '6rem',
+          [breakpoints.down('md')]: {
+            fontSize: '5.35rem',
+          },
+          [breakpoints.down('sm')]: {
+            fontSize: '5.10rem',
+          },
+        },
+        h2: {
+          fontSize: '3.75rem',
+          [breakpoints.down('md')]: {
+            fontSize: '3.1rem',
+          },
+          [breakpoints.down('sm')]: {
+            fontSize: '2.85rem',
+          },
+        },
+        h3: {
+          fontSize: '3rem',
+          [breakpoints.down('md')]: {
+            fontSize: '2.35rem',
+          },
+          [breakpoints.down('sm')]: {
+            fontSize: '2.20rem',
+          },
+        },
+        h4: {
+          fontSize: '2.15rem',
+          [breakpoints.down('md')]: {
+            fontSize: '1.5rem',
+          },
+          [breakpoints.down('sm')]: {
+            fontSize: '1.25rem',
+          },
+        },
+      },
+    },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          '& .MuiGrid-item': {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          },
+        },
+      },
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -42,8 +96,8 @@ export const theme = createTheme({
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
               border: 'rgb(var(--primary-rgb-light)) 4px solid',
-              'border-radius': '25px',
-              'background-color': 'rgb(var(--primary-rgb-light), 0.1)',
+              borderRadius: '25px',
+              backgroundColor: 'rgb(var(--primary-rgb-light), 0.1)',
             },
             '&:hover fieldset': {
               borderColor: 'rgb(var(--primary-rgb))',
@@ -56,4 +110,4 @@ export const theme = createTheme({
       },
     },
   },
-});
+};

@@ -1,13 +1,27 @@
 import Head from 'next/head';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import PageWrapper from '@/components/PageWrapper';
-import LoadingIndicator from '@/components/loading';
 
 function Report() {
   return (
-    <div>
-      <h1>Report</h1>
-      <LoadingIndicator />
-    </div>
+    <Box sx={{
+      flexGrow: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '2rem 0',
+    }}
+    >
+      <Typography variant="h2"> Tuition Report </Typography>
+      <Box sx={{
+        flexGrow: 1,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+      >
+        <CircularProgress />
+      </Box>
+    </Box>
   );
 }
 

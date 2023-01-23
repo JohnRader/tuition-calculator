@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import OnboardingForm from '@/components/OnboardingForm';
 import PageWrapper from '@/components/PageWrapper';
-import styles from '@/styles/index.module.css';
 
 export default function RootPage() {
   return (
@@ -15,7 +14,6 @@ export default function RootPage() {
 
       <PageWrapper
         page={<OnboardingForm />}
-        classes={styles['onboarding-page']}
       />
     </>
   );

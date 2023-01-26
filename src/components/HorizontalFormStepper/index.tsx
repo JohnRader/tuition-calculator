@@ -4,6 +4,7 @@ import {
 import { useState, ReactNode } from 'react';
 import type { SetStateAction } from 'react';
 
+import { useRouter } from 'next/router';
 import { toTitleCase } from '@/utils';
 import { FormAction } from '@/types';
 import { theme } from '@/styles/theme';
@@ -173,12 +174,7 @@ function FormStepper(props: FormStepperProps) {
   return (
     <>
       <MobileStepper
-        sx={{
-          display: {
-            xs: 'flex',
-            sm: 'none',
-          },
-        }}
+        sx={{ display: { xs: 'flex', sm: 'none' } }}
         variant="dots"
         backButton={(
           <Button
@@ -206,28 +202,24 @@ function FormStepper(props: FormStepperProps) {
       />
 
       <Stepper
-        sx={{
-          display: {
-            xs: 'none',
-            sm: 'flex',
-          },
-        }}
+        sx={{ display: { xs: 'none', sm: 'flex' } }}
         activeStep={currentStep}
         alternativeLabel
       >
         {stepNames.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
-          const labelProps: {
-            optional?: ReactNode;
-          } = {};
+          const labelProps: { optional?: ReactNode; } = {};
+
           if (isStepOptional(index)) {
             labelProps.optional = (
               <Typography variant="caption">Optional</Typography>
             );
           }
+
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
+
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{toTitleCase(label)}</StepLabel>
@@ -253,6 +245,7 @@ export default function HorizontalFormStepper(props: StepContentProps) {
 
   const [skipped, setSkipped] = useState(new Set<number>());
 
+  const router = useRouter();
   const isStepOptional = (step: number) => step === 4 || step === 5;
   const isStepSkipped = (step: number) => skipped.has(step);
 
@@ -285,7 +278,7 @@ export default function HorizontalFormStepper(props: StepContentProps) {
   };
 
   const handleSubmit = () => {
-    console.log('submit');
+    router.push('/report');
   };
 
   type FormActions = typeof handleBack
@@ -304,11 +297,10 @@ export default function HorizontalFormStepper(props: StepContentProps) {
 
   return (
     <Box sx={{
-      width: '100%',
-      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-start',
+      flexGrow: 1,
       gap: theme.spacing(6),
     }}
     >

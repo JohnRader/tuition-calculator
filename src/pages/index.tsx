@@ -12,9 +12,7 @@ export default function RootPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageWrapper
-        page={<OnboardingForm />}
-      />
+      <PageWrapper page={<OnboardingForm />} />
     </>
   );
 }

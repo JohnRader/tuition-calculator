@@ -33,6 +33,21 @@ const { breakpoints } = themeBase;
 export const theme = {
   ...themeBase,
   components: {
+    MuiStepIcon: {
+      styleOverrides: {
+        root: {
+          '&.Mui-active': {
+            color: themeBase.palette.primary.main,
+          },
+          '&.Mui-completed': {
+            color: themeBase.palette.success.main,
+          },
+          '&.Mui-error': {
+            color: themeBase.palette.error.main,
+          },
+        },
+      },
+    },
     MuiTypography: {
       styleOverrides: {
         h1: {

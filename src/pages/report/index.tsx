@@ -35,9 +35,7 @@ export default function ReportPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageWrapper
-        page={<Report />}
-      />
+      <PageWrapper page={<Report />} />
     </>
 
   );

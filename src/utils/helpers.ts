@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useMediaQuery } from '@mui/material';
+import { theme } from '@/styles/theme';
 import { TitleCase } from '@/types';
 
 export const StringIsNumber = (value: any) => isNaN(Number(value)) === false;
@@ -9,7 +11,7 @@ export const StringIsNumber = (value: any) => isNaN(Number(value)) === false;
  * @param iterible - Enum to convert
  * @returns Array of iterible values
  */
-export const EnumKeysToArray = (iterible: any) => Object.keys(iterible)
+export const EnumKeysToArray = (iterible: any): string[] => Object.keys(iterible)
   .filter(StringIsNumber)
   .map((key) => iterible[key]);
 
@@ -81,4 +83,8 @@ export function formatCurrency(str: number) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return str.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+}
+
+export function isMobile() {
+  return useMediaQuery(theme.breakpoints.down('sm'));
 }

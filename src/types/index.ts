@@ -1,3 +1,3 @@
 export * from './string';
-export * from './form';
+export * from './forms';
 export * from './onboarding';

@@ -41,7 +41,7 @@ export const theme = {
             fontSize: '5.35rem',
           },
           [breakpoints.down('sm')]: {
-            fontSize: '5.10rem',
+            fontSize: '5rem',
           },
         },
         h2: {
@@ -50,7 +50,7 @@ export const theme = {
             fontSize: '3.1rem',
           },
           [breakpoints.down('sm')]: {
-            fontSize: '2.85rem',
+            fontSize: '2.75rem',
           },
         },
         h3: {
@@ -59,7 +59,7 @@ export const theme = {
             fontSize: '2.35rem',
           },
           [breakpoints.down('sm')]: {
-            fontSize: '2.20rem',
+            fontSize: '2.10rem',
           },
         },
         h4: {
@@ -68,7 +68,7 @@ export const theme = {
             fontSize: '1.5rem',
           },
           [breakpoints.down('sm')]: {
-            fontSize: '1.25rem',
+            fontSize: '1.15rem',
           },
         },
       },

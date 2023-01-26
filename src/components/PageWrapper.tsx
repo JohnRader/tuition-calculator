@@ -17,7 +17,7 @@ export default function PageWrapper(props: PageProps) {
           flex: 1,
           flexGrow: 1,
           maxHeight: 'calc(100vh - var(--app-header-height))',
-          overflowY: 'scroll',
+          overflowY: 'auto',
         }}
       >
         {page}

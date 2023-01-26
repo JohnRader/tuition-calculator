@@ -31,10 +31,8 @@ export default function OnboardingForm() {
   return (
     <FormControl
       sx={{
-        height: '100%',
         padding: '2rem 0',
         display: 'flex',
-        flexGrow: 1,
       }}
     >
       <HorizontalFormStepper

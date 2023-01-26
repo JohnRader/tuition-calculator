@@ -13,7 +13,7 @@ export default function PageWrapper(props: PageProps) {
       <Container
         id="page-container"
         maxWidth="lg"
-        sx={{ flex: 1, flexGrow: 1 }}
+        sx={{ height: '100%' }}
       >
         {page}
       </Container>

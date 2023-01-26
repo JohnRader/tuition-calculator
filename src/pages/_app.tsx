@@ -18,7 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <AppHeader />
         <Component {...pageProps} />
       </Box>
-
     </ThemeProvider>
   );
 }

@@ -3,28 +3,34 @@ import { createTheme } from '@mui/material';
 const themeBase = createTheme({
   palette: {
     primary: {
-      main: '#977AEA',
-      dark: '#5D3F6A',
-      light: '#C0AFF2',
+      main: '#292940',
     },
     secondary: {
-      main: '#CAD7DD',
+      main: '#e53d6f',
     },
     success: {
-      main: '#5DA271',
+      main: '#00B289',
     },
     error: {
-      main: '#D7263D',
+      main: '#C91B3B',
     },
     warning: {
-      main: '#F2BB05',
+      main: '#F9A828',
     },
     info: {
-      main: '#083D77',
+      main: '#6791FE',
+    },
+    background: {
+      paper: '#fff',
+      default: '#292940',
     },
   },
   typography: {
     fontFamily: ['Raleway', 'arial'].join(','),
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700,
   },
 });
 
@@ -33,11 +39,21 @@ const { breakpoints } = themeBase;
 export const theme = {
   ...themeBase,
   components: {
+    MuiMobileStepper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgb(var(--primary-rgb-light))',
+        },
+        dotActive: {
+          backgroundColor: 'rgb(var(--secondary-rgb-light))',
+        },
+      },
+    },
     MuiStepIcon: {
       styleOverrides: {
         root: {
           '&.Mui-active': {
-            color: themeBase.palette.primary.main,
+            color: themeBase.palette.secondary.main,
           },
           '&.Mui-completed': {
             color: themeBase.palette.success.main,
@@ -99,26 +115,40 @@ export const theme = {
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 'var(--border-radius)',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 'var(--border-radius)',
+        },
+      },
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
           '& label.Mui-focused': {
-            color: 'rgb(var(--primary-rgb))',
+            color: themeBase.palette.secondary.main,
           },
           '& .MuiInput-underline:after': {
-            borderBottomColor: 'rgb(var(--primary-rgb))',
+            borderBottomColor: themeBase.palette.secondary.main,
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              border: 'rgb(var(--primary-rgb-light)) 4px solid',
-              borderRadius: '25px',
-              backgroundColor: 'rgb(var(--primary-rgb-light), 0.1)',
+              border: 'rgb(var(--secondary-rgb-light)) 3px solid',
+              borderRadius: '35px',
+              backgroundColor: 'rgb(var(--secondary-rgb-light), 0.1)',
             },
             '&:hover fieldset': {
-              borderColor: 'rgb(var(--primary-rgb))',
+              borderColor: 'rgb(var(--secondary-rgb))',
             },
             '&.Mui-focused fieldset': {
-              borderColor: 'rgb(var(--primary-rgb))',
+              borderColor: 'rgb(var(--secondary-rgb))',
             },
           },
         },

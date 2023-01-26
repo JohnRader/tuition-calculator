@@ -137,6 +137,7 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
                 aria-labelledby="budget"
                 step={1000}
                 max={100000}
+                color="secondary"
               />
               <Typography
                 id="budget"

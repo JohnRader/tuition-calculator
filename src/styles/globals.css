@@ -1,39 +1,22 @@
 :root {
   --max-width: 1100px;
-  --border-radius: 16px;
+  --border-radius: 35px;
   --app-header-height: 64px;
 
   /* Colors */
-  --primary-rgb: 151, 122, 234;
-  --primary-rgb-dark: 93, 63, 106;
-  --primary-rgb-light: 192, 175, 242;
+  --background-rgb: 245, 245, 246;
+  --primary-rgb: 41, 41, 64;
+  --primary-rgb-dark: 0, 0, 25;
+  --primary-rgb-light: 81, 80, 106;
 
-  --secondary-rgb: 245, 237, 240;
-  --success-rgb: 93, 162, 113;
-  --warning-rgb: 242, 187, 5;
-  --error-rgb: 215, 38, 61;
-  --info-rgb: 8, 61, 119;
+  --secondary-rgb: 229, 61, 111;
+  --secondary-rgb-dark: 173, 0, 68;
+  --secondary-rgb-light: 255, 115, 157;
 
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
+  --success-rgb: 0, 178, 137;
+  --warning-rgb: 249, 168, 40;
+  --error-rgb: 201, 27, 59;
+  --info-rgb: 103, 145, 254;
 }
 
 * {
@@ -58,13 +41,11 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    0deg,
+    rgba(var(--background-rgb)) 75%,
+    rgba(103, 145, 254, 0.8) 130.52%),
+    #FFFFFF;
 }
 
 a {
@@ -79,5 +60,5 @@ a {
 }
 
 strong {
-  color: rgb(var(--primary-rgb));
+  color: rgb(var(--secondary-rgb));
 }

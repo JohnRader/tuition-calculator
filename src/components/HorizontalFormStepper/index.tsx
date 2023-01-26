@@ -1,6 +1,7 @@
 import {
   Typography, Button, StepLabel, Step, Stepper, Box, MobileStepper,
 } from '@mui/material';
+import { ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 import { useState, ReactNode } from 'react';
 import type { SetStateAction } from 'react';
 
@@ -32,16 +33,18 @@ function FormActions(props: FormActionsProps) {
             color="primary"
             variant="outlined"
             size="large"
-            sx={{ mr: 4 }}
+            sx={{ mr: 4, minWidth: '128px' }}
             onClick={formActions.RESET}
           >
             Reset
           </Button>
           <Button
-            color="primary"
+            sx={{ minWidth: '128px' }}
+            color="secondary"
             variant="contained"
             size="large"
             onClick={formActions.SUBMIT}
+            endIcon={<ArrowForwardIcon />}
           >
             Submit
           </Button>
@@ -54,7 +57,7 @@ function FormActions(props: FormActionsProps) {
             variant="outlined"
             disabled={currentStep === 0}
             onClick={formActions.BACK}
-            sx={{ mr: 4 }}
+            sx={{ mr: 4, minWidth: '128px' }}
             size="large"
           >
             Back
@@ -65,17 +68,19 @@ function FormActions(props: FormActionsProps) {
             color="primary"
             variant="text"
             onClick={formActions.SKIP}
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, minWidth: '128px' }}
             size="large"
           >
             Skip
           </Button>
           )}
           <Button
-            color="primary"
+            sx={{ minWidth: '128px' }}
+            color="secondary"
             variant="contained"
             onClick={formActions.NEXT}
             size="large"
+            endIcon={<ArrowForwardIcon />}
           >
             {currentStep === stepNames.length - 1 ? 'Finish' : 'Next'}
           </Button>
@@ -174,25 +179,31 @@ function FormStepper(props: FormStepperProps) {
   return (
     <>
       <MobileStepper
-        sx={{ display: { xs: 'flex', sm: 'none' } }}
+        sx={{
+          display: { xs: 'flex', sm: 'none' },
+          padding: theme.spacing(2),
+        }}
         variant="dots"
         backButton={(
           <Button
+            sx={{ minWidth: '96px' }}
             color="primary"
-            variant="outlined"
+            variant="contained"
             disabled={currentStep === 0}
             onClick={isSummaryStep() ? formActions.RESET : formActions.BACK}
-            size="large"
+            size="small"
           >
             { isSummaryStep() ? 'Reset' : 'Back'}
           </Button>
         )}
         nextButton={(
           <Button
-            color="primary"
+            sx={{ minWidth: '96px' }}
+            color="secondary"
             variant="contained"
             onClick={isSummaryStep() ? formActions.SUBMIT : formActions.NEXT}
-            size="large"
+            size="small"
+            endIcon={<ArrowForwardIcon />}
           >
             {buttonPrimaryActionText()}
           </Button>

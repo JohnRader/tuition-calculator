@@ -54,7 +54,7 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
           sx={{
             width: '80px',
             color: 'black',
-            backgroundColor: 'rgb(var(--primary-rgb), .4)',
+            backgroundColor: 'rgb(var(--secondary-rgb), .4)',
             marginLeft: theme.spacing(1),
           }}
           size="small"

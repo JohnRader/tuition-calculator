@@ -118,7 +118,7 @@ function FormStepContent(props: FormStepContentProps) {
             display: 'flex',
             justifyContent: 'center',
             paddingTop: {
-              xs: '5rem',
+              xs: '3rem',
               sm: '0',
             },
           }}

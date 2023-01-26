@@ -124,7 +124,7 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              maxWidth: 'calc(100% - 4rem)',
+              width: 'calc(100% - 4rem)',
               padding: {
                 xs: '1rem',
                 md: '0',

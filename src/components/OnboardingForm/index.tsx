@@ -23,6 +23,8 @@ export default function OnboardingForm() {
 
   const content = OnboardingFormQuestion({ step, form, setForm });
 
+  const optionalSteps = [OnboardingFormStep.SCORES];
+
   return (
     <FormControl sx={{ padding: '2rem 0', display: 'flex' }}>
       <HorizontalFormStepper
@@ -30,6 +32,7 @@ export default function OnboardingForm() {
         currentStep={step}
         setCurrentStep={setStep}
         stepNames={steps}
+        optionalSteps={optionalSteps}
       />
     </FormControl>
   );

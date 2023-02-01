@@ -22,6 +22,6 @@ export enum OnboardingFormStep {
   LOCATION,
   UNIVERSITY,
   BUDGET,
-  MAJOR,
-  PLACEMENT,
+  SCORES,
+  REVIEW,
 }

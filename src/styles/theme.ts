@@ -24,6 +24,21 @@ const themeBase = createTheme({
       paper: '#fff',
       default: '#292940',
     },
+    accentBlue: {
+      main: '#6791FE',
+      dark: '#3C5E9F',
+      light: '#A6C0FE',
+    },
+    accentPink: {
+      main: '#EB6662',
+      dark: '#B8332F',
+      light: '#FF9995',
+    },
+    accentTeal: {
+      main: '#51BBD2',
+      dark: '#1E889F',
+      light: '#84EEFF',
+    },
   },
   typography: {
     fontFamily: ['Raleway', 'arial'].join(','),
@@ -39,6 +54,13 @@ const { breakpoints } = themeBase;
 export const theme = {
   ...themeBase,
   components: {
+    MuiSlider: {
+      styleOverrides: {
+        root: {
+          color: 'rgb(var(--accent-blue-rgb))',
+        },
+      },
+    },
     MuiMobileStepper: {
       styleOverrides: {
         root: {
@@ -53,13 +75,13 @@ export const theme = {
       styleOverrides: {
         root: {
           '&.Mui-active': {
-            color: themeBase.palette.secondary.main,
+            color: 'rgb(var(--secondary-rgb))',
           },
           '&.Mui-completed': {
-            color: themeBase.palette.success.main,
+            color: 'rgb(var(--success-rgb))',
           },
           '&.Mui-error': {
-            color: themeBase.palette.error.main,
+            color: 'rgb(var(--error-rgb))',
           },
         },
       },
@@ -133,22 +155,22 @@ export const theme = {
       styleOverrides: {
         root: {
           '& label.Mui-focused': {
-            color: themeBase.palette.secondary.main,
+            color: 'rgb(var(--accent-blue-rgb-dark))',
           },
           '& .MuiInput-underline:after': {
-            borderBottomColor: themeBase.palette.secondary.main,
+            borderBottomColor: 'rgb(var(--accent-blue-rgb-dark))',
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              border: 'rgb(var(--secondary-rgb-light)) 3px solid',
+              border: 'rgb(var(--accent-blue-rgb-light)) 3px solid',
               borderRadius: '35px',
-              backgroundColor: 'rgb(var(--secondary-rgb-light), 0.1)',
+              backgroundColor: 'rgb(var(--accent-blue-rgb-light), 0.2)',
             },
             '&:hover fieldset': {
-              borderColor: 'rgb(var(--secondary-rgb))',
+              borderColor: 'rgb(var(--accent-blue-rgb-dark))',
             },
             '&.Mui-focused fieldset': {
-              borderColor: 'rgb(var(--secondary-rgb))',
+              borderColor: 'rgb(var(--accent-blue-rgb-dark))',
             },
           },
         },

@@ -103,36 +103,20 @@ function FormStepContent(props: FormStepContentProps) {
     formActions, currentStepContent, stepNames, currentStep, isStepOptional,
   } = props;
 
-  const isSummaryPage = currentStep === stepNames.length;
-
   return (
     <>
-      { isSummaryPage ? (
-        <>
-          {/* summary page */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished!
-            </Typography>
-          </Box>
-        </>
-      ) : (
-        <>
-          {/* content */}
-          <Box sx={{
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            paddingTop: {
-              xs: '1rem',
-              sm: '0',
-            },
-          }}
-          >
-            { currentStepContent }
-          </Box>
-        </>
-      ) }
+      <Box sx={{
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: {
+          xs: '1rem',
+          sm: '0',
+        },
+      }}
+      >
+        {currentStepContent}
+      </Box>
 
       <Box sx={{
         display: {
@@ -167,8 +151,8 @@ function FormStepper(props: FormStepperProps) {
     formActions, currentStep, stepNames, isStepOptional, isStepSkipped,
   } = props;
 
-  const isLastStep = () => currentStep === stepNames.length - 1;
-  const isSummaryStep = () => currentStep === stepNames.length;
+  const isLastStep = () => currentStep === stepNames.length - 2;
+  const isSummaryStep = () => currentStep === stepNames.length - 1;
 
   const buttonPrimaryActionText = () => {
     if (isSummaryStep()) return 'Submit';
@@ -212,11 +196,7 @@ function FormStepper(props: FormStepperProps) {
         steps={stepNames.length}
       />
 
-      <Stepper
-        sx={{ display: { xs: 'none', sm: 'flex' } }}
-        activeStep={currentStep}
-        alternativeLabel
-      >
+      <Stepper activeStep={currentStep} alternativeLabel>
         {stepNames.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: { optional?: ReactNode; } = {};
@@ -242,22 +222,24 @@ function FormStepper(props: FormStepperProps) {
   );
 }
 
-interface StepContentProps {
+interface HorizontalFormStepperProps {
   currentStepContent: ReactNode;
   currentStep: number;
   setCurrentStep: (value: SetStateAction<number>) => void;
   stepNames: string[];
+  optionalSteps: number[];
 }
 
-export default function HorizontalFormStepper(props: StepContentProps) {
+export default function HorizontalFormStepper(props: HorizontalFormStepperProps) {
   const {
-    stepNames, currentStep, currentStepContent, setCurrentStep,
+    stepNames, currentStep, currentStepContent, setCurrentStep, optionalSteps,
   } = props;
 
   const [skipped, setSkipped] = useState(new Set<number>());
 
   const router = useRouter();
-  const isStepOptional = (step: number) => step === 4 || step === 5;
+
+  const isStepOptional = (step: number) => optionalSteps.includes(step);
   const isStepSkipped = (step: number) => skipped.has(step);
 
   const handleNext = () => {
@@ -316,9 +298,9 @@ export default function HorizontalFormStepper(props: StepContentProps) {
     }}
     >
       <FormStepper
-        formActions={formActions}
-        currentStep={currentStep}
         stepNames={stepNames}
+        currentStep={currentStep}
+        formActions={formActions}
         isStepOptional={isStepOptional}
         isStepSkipped={isStepSkipped}
       />

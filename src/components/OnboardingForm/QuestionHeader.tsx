@@ -24,7 +24,13 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
         {' '}
         <strong>university</strong>
         {' '}
-        would you like to attend?
+        would you like to attend and
+        {' '}
+        what would you like to
+        {' '}
+        <strong>major</strong>
+        {' '}
+        in?
       </Typography>),
     [OnboardingFormStep.BUDGET]: (
       <Typography variant="h5" gutterBottom>
@@ -33,16 +39,7 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
         <strong>budget</strong>
         ?
       </Typography>),
-    [OnboardingFormStep.MAJOR]: (
-      <Typography variant="h5" gutterBottom>
-        What would you like to
-        {' '}
-        <strong>major</strong>
-        {' '}
-        in?
-      </Typography>
-    ),
-    [OnboardingFormStep.PLACEMENT]: (
+    [OnboardingFormStep.SCORES]: (
       <Typography variant="h5" gutterBottom>
 
         What is your
@@ -67,6 +64,7 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
         />
       </Typography>
     ),
+    [OnboardingFormStep.REVIEW]: (<Typography variant="h2">Review</Typography>),
   };
 
   return questionHeaders[questionId];

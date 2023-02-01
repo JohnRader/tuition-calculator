@@ -5,18 +5,64 @@
 
   /* Colors */
   --background-rgb: 245, 245, 246;
+  --background-hex: #f5f5f6;
+
   --primary-rgb: 41, 41, 64;
+  --primary-hex: #292940;
+
   --primary-rgb-dark: 0, 0, 25;
+  --primary-hex-dark: #000019;
+
   --primary-rgb-light: 81, 80, 106;
+  --primary-hex-light: #51506A;
 
   --secondary-rgb: 229, 61, 111;
-  --secondary-rgb-dark: 173, 0, 68;
-  --secondary-rgb-light: 255, 115, 157;
+  --secondary-hex: #E53D6F;
 
+  --secondary-rgb-dark: 173, 0, 68;
+  --secondary-hex-dark: #AD0044;
+
+  --secondary-rgb-light: 255, 115, 157;
+  --secondary-hex-light: #FF739D;
+
+  --accent-blue-rgb: 103, 145, 254;
+  --accent-blue-hex: #6791FE;
+
+  --accent-blue-rgb-dark: 72, 101, 177;
+  --accent-blue-hex-dark: #4865B1;
+
+  --accent-blue-rgb-light: 133, 167, 254;
+  --accent-blue-hex-light: #85A7FE;
+
+  --accent-pink-rgb: 235, 102, 98;
+  --accent-pink-hex: #eb6662;
+
+  --accent-pink-rgb-dark: 184, 51, 47;
+  --accent-pink-hex-dark: #B8332F;
+
+  --accent-pink-rgb-light: 255, 153, 149;
+  --accent-pink-hex-light: #FF9995;
+
+  --accent-teal-rgb: 81, 187, 210;
+  --accent-teal-hex: #51BBD2;
+
+  --accent-teal-rgb-dark: 30, 136, 159;
+  --accent-teal-hex-dark: #1E889F;
+
+  --accent-teal-rgb-light: 132, 238, 255;
+  --accent-teal-hex-light: #84EEFF;
+  
   --success-rgb: 0, 178, 137;
+  --success-hex: #00B289;
+
   --warning-rgb: 249, 168, 40;
+  --warning-hex: #F9A828;
+
   --error-rgb: 201, 27, 59;
+  --error-hex: #C91B3B;
+
   --info-rgb: 103, 145, 254;
+  --info-hex: #6791FE;
 }
 
 * {

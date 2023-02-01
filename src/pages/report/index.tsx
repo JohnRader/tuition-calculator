@@ -4,11 +4,8 @@ import {
   Box, Typography, CircularProgress, Grid, Card, Button, Collapse,
 } from '@mui/material';
 import { ExpandMoreRounded, ExpandLessRounded } from '@mui/icons-material';
-import { useState, ReactElement, useCallback } from 'react';
-import {
-  PieChart, Pie, Sector, ResponsiveContainer,
-  SectorProps,
-} from 'recharts';
+import { useState } from 'react';
+
 import PageWrapper from '@/components/PageWrapper';
 import { State, StateCode, StateCodeMap } from '@/types';
 import { formatCurrency } from '@/utils';

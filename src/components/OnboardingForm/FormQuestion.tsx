@@ -9,7 +9,7 @@ import { formatCurrency, isMobile } from '@/utils';
 
 function classes(step: OnboardingFormStep) {
   const inputClasses: Record<OnboardingFormStep, string> = {
-    [OnboardingFormStep.STATE]: `${mui['text-field--sm']}`,
+    [OnboardingFormStep.LOCATION]: `${mui['text-field--sm']}`,
     [OnboardingFormStep.UNIVERSITY]: `${mui['text-field--md']}`,
     [OnboardingFormStep.BUDGET]: `${mui['text-field--sm']}`,
     [OnboardingFormStep.MAJOR]: `${mui['text-field--md']}`,
@@ -37,7 +37,7 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
   const textFieldSize = isMobile() ? 'small' : 'medium';
 
   switch (step) {
-    case OnboardingFormStep.STATE:
+    case OnboardingFormStep.LOCATION:
       return (
         <Grow in mountOnEnter unmountOnExit>
           <Card
@@ -53,10 +53,22 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
               padding: '2rem',
             }}
           >
-            <QuestionHeader questionId={OnboardingFormStep.STATE} />
+            <QuestionHeader questionId={OnboardingFormStep.LOCATION} />
+            <TextField
+              id="city"
+              className={classes(OnboardingFormStep.LOCATION)}
+              fullWidth
+              label="City"
+              variant="outlined"
+              size={textFieldSize}
+              value={form.city}
+              onChange={(e) => setForm(
+                { ...form, city: e.target.value },
+              )}
+            />
             <TextField
               id="state"
-              className={classes(OnboardingFormStep.STATE)}
+              className={classes(OnboardingFormStep.LOCATION)}
               fullWidth
               label="State"
               variant="outlined"

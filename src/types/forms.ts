@@ -10,15 +10,16 @@ export type FormState = OnboardingFormState;
 
 export interface OnboardingFormState {
   state: string;
+  city: string;
   university: string;
   budget: number;
   major: string;
-  gpa: number | null;
-  test_scores: number | null;
+  gpa?: number;
+  test_scores?: number;
 }
 
 export enum OnboardingFormStep {
-  STATE,
+  LOCATION,
   UNIVERSITY,
   BUDGET,
   MAJOR,

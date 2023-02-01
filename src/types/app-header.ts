@@ -1,4 +1,5 @@
 export enum MenuId {
-  MENU_ID = 'primary-search-account-menu',
-  MENU_ID_MOBILE = 'primary-search-account-menu-mobile',
+  MAIN_MENU = 'main-menu',
+  PROFILE_MENU = 'profile-menu',
+  MOBILE_PROFILE_MENU = 'mobile-profile-menu',
 }

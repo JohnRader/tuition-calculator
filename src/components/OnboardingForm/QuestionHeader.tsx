@@ -4,9 +4,13 @@ import { theme } from '@/styles/theme';
 
 export default function QuestionHeader({ questionId }: { questionId: OnboardingFormStep }) {
   const questionHeaders = {
-    [OnboardingFormStep.STATE]: (
+    [OnboardingFormStep.LOCATION]: (
       <Typography variant="h5" gutterBottom>
         Which
+        {' '}
+        <strong>city</strong>
+        {' '}
+        and
         {' '}
         <strong>state</strong>
         {' '}

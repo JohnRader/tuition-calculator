@@ -2,7 +2,6 @@ import {
   AppBar,
   Container,
   Toolbar,
-  Typography,
   IconButton,
   Badge,
   Box,
@@ -21,6 +20,7 @@ import {
 import {
   useState, MouseEvent, ReactElement, useEffect,
 } from 'react';
+import { useRouter } from 'next/router';
 
 import SearchBar from '@/components/SearchBar';
 import { MenuId } from '@/types/app-header';
@@ -44,34 +44,54 @@ export default function AppHeader() {
     setWindowAfterSSR(window);
   }, []);
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const router = useRouter();
+
+  const [mainMenuAnchorEl, setMainMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [profileMenuAnchorEl, setProfileMenuAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMainMenuOpen = Boolean(mainMenuAnchorEl);
+  const isProfileMenuOpen = Boolean(profileMenuAnchorEl);
+  const isMobileProfileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleMainMenuOpen = (event: MouseEvent<HTMLElement>) => {
+    setMainMenuAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
+  const handleMainMenuClose = () => {
+    setMainMenuAnchorEl(null);
+  };
+
+  const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
+    setProfileMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileMenuClose = () => {
+    setProfileMenuAnchorEl(null);
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event: MouseEvent<HTMLElement>) => {
+  const handleMobileProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
+  const handleMobileProfileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const goToHome = () => {
+    handleMainMenuClose();
+    router.push('/');
+  };
+
+  const goToBorrow = () => {
+    handleMainMenuClose();
+    router.push('/borrow');
+  };
+  const renderProfileMenu = (
     <Menu
-      id={MenuId.MENU_ID}
-      anchorEl={anchorEl}
+      id={MenuId.PROFILE_MENU}
+      anchorEl={profileMenuAnchorEl}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
@@ -81,17 +101,17 @@ export default function AppHeader() {
         vertical: 'top',
         horizontal: 'right',
       }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
+      open={isProfileMenuOpen}
+      onClose={handleProfileMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleProfileMenuClose}>My account</MenuItem>
     </Menu>
   );
 
-  const renderMobileMenu = (
+  const renderMobileProfileMenu = (
     <Menu
-      id={MenuId.MENU_ID_MOBILE}
+      id={MenuId.MOBILE_PROFILE_MENU}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -102,8 +122,8 @@ export default function AppHeader() {
         vertical: 'top',
         horizontal: 'right',
       }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+      open={isMobileProfileMenuOpen}
+      onClose={handleMobileProfileMenuClose}
     >
       <MenuItem>
         <IconButton size="large" aria-label="show new mail" color="inherit">
@@ -140,6 +160,30 @@ export default function AppHeader() {
     </Menu>
   );
 
+  const renderMainMenu = (
+    <Menu
+      id={MenuId.MAIN_MENU}
+      anchorEl={mainMenuAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      open={isMainMenuOpen}
+      onClose={handleMainMenuClose}
+    >
+      <MenuItem onClick={goToHome}>
+        Tuition Calulator
+      </MenuItem>
+      <MenuItem onClick={goToBorrow}>
+        Loan Calulator
+      </MenuItem>
+    </Menu>
+  );
   return (
     <>
       {!!windowAfterSSR && (
@@ -153,18 +197,10 @@ export default function AppHeader() {
                 color="inherit"
                 aria-label="open drawer"
                 sx={{ mr: 2 }}
+                onClick={handleMainMenuOpen}
               >
                 <MenuIcon />
               </IconButton>
-
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ display: { xs: 'none', sm: 'block' } }}
-              >
-                Tuition Calculator
-              </Typography>
 
               <SearchBar />
 
@@ -189,7 +225,7 @@ export default function AppHeader() {
                   size="large"
                   edge="end"
                   aria-label="account"
-                  aria-controls={menuId}
+                  aria-controls={MenuId.PROFILE_MENU}
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
                   color="inherit"
@@ -202,9 +238,9 @@ export default function AppHeader() {
                 <IconButton
                   size="large"
                   aria-label="show more"
-                  aria-controls={MenuId.MENU_ID_MOBILE}
+                  aria-controls={MenuId.MOBILE_PROFILE_MENU}
                   aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
+                  onClick={handleMobileProfileMenuOpen}
                   color="inherit"
                 >
                   <MoreIcon />
@@ -215,8 +251,9 @@ export default function AppHeader() {
         </AppBar>
       </HideOnScroll>
       )}
-      {renderMobileMenu}
-      {renderMenu}
+      {renderMobileProfileMenu}
+      {renderMainMenu}
+      {renderProfileMenu}
     </>
   );
 }

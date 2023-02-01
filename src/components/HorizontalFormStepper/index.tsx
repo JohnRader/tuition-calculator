@@ -22,7 +22,7 @@ function FormActions(props: FormActionsProps) {
     formActions, stepNames, currentStep, isStepOptional,
   } = props;
 
-  const isSummaryPage = currentStep === stepNames.length;
+  const isSummaryPage = currentStep === stepNames.length - 1;
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>

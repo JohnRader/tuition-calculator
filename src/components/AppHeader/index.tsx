@@ -9,6 +9,14 @@ import {
   MenuItem,
   Slide,
   useScrollTrigger,
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  Typography,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -16,6 +24,8 @@ import {
   Mail as MailIcon,
   Notifications as NotificationsIcon,
   MoreVert as MoreIcon,
+  Calculate as CalculateIcon,
+  School as SchoolIcon,
 } from '@mui/icons-material';
 import {
   useState, MouseEvent, ReactElement, useEffect,
@@ -24,6 +34,7 @@ import { useRouter } from 'next/router';
 
 import SearchBar from '@/components/SearchBar';
 import { MenuId } from '@/types/app-header';
+import { Route } from '@/types';
 
 function HideOnScroll({ children }: { children: ReactElement }) {
   const trigger = useScrollTrigger({
@@ -46,21 +57,12 @@ export default function AppHeader() {
 
   const router = useRouter();
 
-  const [mainMenuAnchorEl, setMainMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [drawerOpen, setdrawerOpen] = useState<boolean>(false);
   const [profileMenuAnchorEl, setProfileMenuAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
 
-  const isMainMenuOpen = Boolean(mainMenuAnchorEl);
   const isProfileMenuOpen = Boolean(profileMenuAnchorEl);
   const isMobileProfileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleMainMenuOpen = (event: MouseEvent<HTMLElement>) => {
-    setMainMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleMainMenuClose = () => {
-    setMainMenuAnchorEl(null);
-  };
 
   const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setProfileMenuAnchorEl(event.currentTarget);
@@ -79,15 +81,6 @@ export default function AppHeader() {
     setMobileMoreAnchorEl(null);
   };
 
-  const goToHome = () => {
-    handleMainMenuClose();
-    router.push('/');
-  };
-
-  const goToBorrow = () => {
-    handleMainMenuClose();
-    router.push('/borrow');
-  };
   const renderProfileMenu = (
     <Menu
       id={MenuId.PROFILE_MENU}
@@ -160,30 +153,65 @@ export default function AppHeader() {
     </Menu>
   );
 
-  const renderMainMenu = (
-    <Menu
-      id={MenuId.MAIN_MENU}
-      anchorEl={mainMenuAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      open={isMainMenuOpen}
-      onClose={handleMainMenuClose}
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event
+      && event.type === 'keydown'
+      && ((event as React.KeyboardEvent).key === 'Tab'
+        || (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+
+    setdrawerOpen(open);
+  };
+
+  const goToRoute = (route: Route) => {
+    toggleDrawer(false);
+    router.push(route);
+  };
+
+  const drawerList = () => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
     >
-      <MenuItem onClick={goToHome}>
-        Tuition Calulator
-      </MenuItem>
-      <MenuItem onClick={goToBorrow}>
-        Loan Calulator
-      </MenuItem>
-    </Menu>
+      <Typography variant="h5" padding="1rem">Tuition Calculator</Typography>
+      <Divider />
+      <List>
+        <ListItem key={Route.HOME} disablePadding>
+          <ListItemButton onClick={() => goToRoute(Route.HOME)}>
+            <ListItemIcon>
+              <SchoolIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={Route.LOAN_CALCULATOR} disablePadding>
+          <ListItemButton onClick={() => goToRoute(Route.LOAN_CALCULATOR)}>
+            <ListItemIcon>
+              <CalculateIcon />
+            </ListItemIcon>
+            <ListItemText primary="Loan Calculator" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
   );
+
+  const renderDrawer = (
+    <SwipeableDrawer
+      anchor="left"
+      open={drawerOpen}
+      onClose={toggleDrawer(false)}
+      onOpen={toggleDrawer(true)}
+    >
+      {drawerList()}
+    </SwipeableDrawer>
+  );
+
   return (
     <>
       {!!windowAfterSSR && (
@@ -197,7 +225,7 @@ export default function AppHeader() {
                 color="inherit"
                 aria-label="open drawer"
                 sx={{ mr: 2 }}
-                onClick={handleMainMenuOpen}
+                onClick={toggleDrawer(true)}
               >
                 <MenuIcon />
               </IconButton>
@@ -252,7 +280,7 @@ export default function AppHeader() {
       </HideOnScroll>
       )}
       {renderMobileProfileMenu}
-      {renderMainMenu}
+      {renderDrawer}
       {renderProfileMenu}
     </>
   );

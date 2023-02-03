@@ -1,22 +1,21 @@
 import {
-  TextField, Slider, Typography, Box, Card, Slide,
+  TextField, Slider, Typography, Box, Card, Slide, IconButton,
 } from '@mui/material';
-import type { ReactNode, SetStateAction } from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Edit } from '@mui/icons-material';
 
-import { OnboardingFormState, OnboardingFormStep } from '@/types';
 import QuestionHeader from './QuestionHeader';
-import { formatCurrency, isMobile } from '@/utils';
 import mui from '@/styles/mui.module.css';
-
-enum OnboardingFormInput {
-  STATE = 'state',
-  CITY = 'city',
-  UNIVERSITY = 'university',
-  MAJOR = 'major',
-  BUDGET = 'budget',
-  GPA = 'gpa',
-  TEST_SCORES = 'test_scores',
-}
+import {
+  formatCurrency, isMobile, toTitleCase, EnumKeysToArray,
+} from '@/utils';
+import {
+  OnboardingFormState,
+  OnboardingFormStep,
+  OnboardingFormInput,
+  OnboardingFormActions,
+  OnboardingFormAction,
+} from '@/types';
 
 function classes(input: OnboardingFormInput) {
   const inputClasses: Record<OnboardingFormInput, string> = {
@@ -34,13 +33,13 @@ function classes(input: OnboardingFormInput) {
 
 interface StepProps {
   form: OnboardingFormState;
-  setForm: (form: SetStateAction<OnboardingFormState>) => void;
+  dispatch: Dispatch<OnboardingFormActions>;
   textFieldSize: 'small' | 'medium';
   handleSliderChange: (event: Event, newValue: number | number[]) => void;
 }
 
 function LocationStep({
-  form, setForm, textFieldSize, handleSliderChange,
+  form, dispatch, textFieldSize, handleSliderChange,
 }: StepProps) {
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
@@ -61,14 +60,19 @@ function LocationStep({
           <TextField
             id={OnboardingFormInput.CITY}
             className={classes(OnboardingFormInput.CITY)}
+            autoFocus
             fullWidth
             label="City"
             variant="outlined"
             size={textFieldSize}
-            value={form.city}
-            onChange={(e) => setForm(
-              { ...form, city: e.target.value },
-            )}
+            value={form.city.value}
+            onChange={(e) => dispatch({
+              type: OnboardingFormAction.SET_FORM,
+              input: OnboardingFormInput.CITY,
+              payload: e.target.value,
+            })}
+            error={form.city.errors.length > 0}
+            helperText={form.city.errors[0] ?? ' '}
           />
           <TextField
             id={OnboardingFormInput.STATE}
@@ -77,10 +81,14 @@ function LocationStep({
             label="State"
             variant="outlined"
             size={textFieldSize}
-            value={form.state}
-            onChange={(e) => setForm(
-              { ...form, state: e.target.value },
-            )}
+            value={form.state.value}
+            onChange={(e) => dispatch({
+              type: OnboardingFormAction.SET_FORM,
+              input: OnboardingFormInput.STATE,
+              payload: e.target.value,
+            })}
+            error={form.state.errors.length > 0}
+            helperText={form.state.errors[0] ?? ' '}
           />
         </Box>
       </Card>
@@ -89,7 +97,7 @@ function LocationStep({
 }
 
 function UniversityStep({
-  form, setForm, textFieldSize, handleSliderChange,
+  form, dispatch, textFieldSize, handleSliderChange,
 }: StepProps) {
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
@@ -110,14 +118,19 @@ function UniversityStep({
           <TextField
             id={OnboardingFormInput.UNIVERSITY}
             className={classes(OnboardingFormInput.UNIVERSITY)}
+            autoFocus
             fullWidth
             label="University"
             variant="outlined"
             size={textFieldSize}
-            value={form.university}
-            onChange={(e) => setForm(
-              { ...form, university: e.target.value },
-            )}
+            value={form.university.value}
+            onChange={(e) => dispatch({
+              type: OnboardingFormAction.SET_FORM,
+              input: OnboardingFormInput.UNIVERSITY,
+              payload: e.target.value,
+            })}
+            error={form.university.errors.length > 0}
+            helperText={form.university.errors[0] ?? ' '}
           />
           <TextField
             id={OnboardingFormInput.MAJOR}
@@ -126,10 +139,14 @@ function UniversityStep({
             label="Major"
             variant="outlined"
             size={textFieldSize}
-            value={form.major}
-            onChange={(e) => setForm(
-              { ...form, major: e.target.value },
-            )}
+            value={form.major.value}
+            onChange={(e) => dispatch({
+              type: OnboardingFormAction.SET_FORM,
+              input: OnboardingFormInput.MAJOR,
+              payload: e.target.value,
+            })}
+            error={form.major.errors.length > 0}
+            helperText={form.major.errors[0] ?? ' '}
           />
         </Box>
       </Card>
@@ -138,7 +155,7 @@ function UniversityStep({
 }
 
 function BudgetStep({
-  form, setForm, textFieldSize, handleSliderChange,
+  form, dispatch, textFieldSize, handleSliderChange,
 }: StepProps) {
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
@@ -167,7 +184,7 @@ function BudgetStep({
         }}
         >
           <Slider
-            value={typeof form.budget === 'number' ? form.budget : 10000}
+            value={typeof form.budget.value === 'number' ? form.budget.value : 10000}
             onChange={handleSliderChange}
             aria-labelledby="budget"
             step={1000}
@@ -177,7 +194,7 @@ function BudgetStep({
             id="budget"
             variant="h2"
           >
-            {formatCurrency(form.budget)}
+            {formatCurrency(Number(form.budget.value))}
             <Typography variant="caption">/yr</Typography>
           </Typography>
         </Box>
@@ -187,7 +204,7 @@ function BudgetStep({
 }
 
 function ScoresStep({
-  form, setForm, textFieldSize, handleSliderChange,
+  form, dispatch, textFieldSize, handleSliderChange,
 }: StepProps) {
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
@@ -208,14 +225,19 @@ function ScoresStep({
           <TextField
             id={OnboardingFormInput.GPA}
             className={classes(OnboardingFormInput.GPA)}
+            autoFocus
             fullWidth
             label="GPA"
             variant="outlined"
             size={textFieldSize}
-            value={form.gpa}
-            onChange={(e) => setForm(
-              { ...form, gpa: Number(e.target.value) },
-            )}
+            value={form.gpa?.value}
+            onChange={(e) => dispatch({
+              type: OnboardingFormAction.SET_FORM,
+              input: OnboardingFormInput.GPA,
+              payload: e.target.value,
+            })}
+            error={form.gpa.errors.length > 0}
+            helperText={form.gpa.errors[0] ?? ' '}
           />
           <TextField
             id={OnboardingFormInput.TEST_SCORES}
@@ -224,10 +246,14 @@ function ScoresStep({
             label="ACT/SAT Score"
             variant="outlined"
             size={textFieldSize}
-            value={form.test_scores}
-            onChange={(e) => setForm(
-              { ...form, test_scores: Number(e.target.value) },
-            )}
+            value={form.test_scores?.value}
+            onChange={(e) => dispatch({
+              type: OnboardingFormAction.SET_FORM,
+              input: OnboardingFormInput.TEST_SCORES,
+              payload: e.target.value,
+            })}
+            error={form.test_scores.errors.length > 0}
+            helperText={form.test_scores.errors[0] ?? ' '}
           />
         </Box>
       </Card>
@@ -235,37 +261,93 @@ function ScoresStep({
   );
 }
 
-function ReviewStep({ form }: { form: OnboardingFormState }) {
+function ReviewStep({
+  form, setStep,
+}: {
+  form: OnboardingFormState;
+  setStep: (step: SetStateAction<OnboardingFormStep>) => void;
+}) {
+  const stepFormValues = (stepName: string) => {
+    const stepMap: Record<string, Record<string, string | number | undefined>> = {
+      LOCATION: { city: form.city.value, state: form.state.value },
+      UNIVERSITY: { university: form.university.value, major: form.major.value },
+      BUDGET: { budget: form.budget.value },
+      SCORES: { gpa: form.gpa.value, test_scores: form.test_scores.value },
+    };
+
+    return stepMap[stepName];
+  };
+
+  const goToStep = (stepName: string) => {
+    const stepMap: Record<string, OnboardingFormStep> = {
+      LOCATION: OnboardingFormStep.LOCATION,
+      UNIVERSITY: OnboardingFormStep.UNIVERSITY,
+      BUDGET: OnboardingFormStep.BUDGET,
+      SCORES: OnboardingFormStep.SCORES,
+    };
+
+    return setStep(stepMap[stepName]);
+  };
+
+  const stepNames = EnumKeysToArray(OnboardingFormStep);
+
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" gap={4} flexGrow="1" alignItems="center" padding="0 1rem">
       <QuestionHeader questionId={OnboardingFormStep.REVIEW} />
-      <ul>
-        {Object.entries(form).map(([key, value]) => (
-          <li key={key}>
-            {key}
-            :
-            {' '}
-            {value}
-          </li>
-        ))}
-      </ul>
+      {stepNames.map((key) => (
+        <Box key={key} sx={{ width: { xs: '100%', md: '600px' } }}>
+          {
+            key !== stepNames[stepNames.length - 1]
+            && (
+            <Card variant="outlined" sx={{ padding: '1rem 2rem' }}>
+              <Box key={key} display="flex" flexGrow="1" flexDirection="column" gap={2}>
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  <Typography variant="h4" color="secondary">
+                    {toTitleCase(key)}
+                  </Typography>
+                  <IconButton sx={{ ml: 2 }} onClick={() => goToStep(key)}><Edit color="primary" /></IconButton>
+                </Box>
+
+                { Object.entries(stepFormValues(key)).map(([formStateKey, formStateValue]) => (
+                  <Box key={`${formStateKey}`} display="flex" gap={1}>
+                    <Typography variant="body1">
+                      { toTitleCase(formStateKey) }
+                      :
+                    </Typography>
+                    <Typography variant="body2">
+                      { formStateKey === 'budget' ? formatCurrency(formStateValue as number) : formStateValue }
+                    </Typography>
+                  </Box>
+
+                ))}
+              </Box>
+            </Card>
+            )
+          }
+        </Box>
+      ))}
     </Box>
   );
 }
 
 interface OnboardingFormQuestionProps {
   step: OnboardingFormStep;
+  setStep: (step: SetStateAction<OnboardingFormStep>) => void;
   form: OnboardingFormState;
-  setForm: (form: SetStateAction<OnboardingFormState>) => void;
+  dispatch: Dispatch<OnboardingFormActions>;
 }
 
 export default function OnboardingFormQuestion(props: OnboardingFormQuestionProps) {
-  const { step, form, setForm } = props;
+  const {
+    step, setStep, form, dispatch,
+  } = props;
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    if (typeof newValue === 'number') {
-      setForm({ ...form, budget: newValue });
-    }
+    dispatch({
+      type: OnboardingFormAction.SET_FORM,
+      input: OnboardingFormInput.BUDGET,
+      payload: Number(newValue),
+    });
   };
 
   const textFieldSize = isMobile() ? 'small' : 'medium';
@@ -274,7 +356,7 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
     [OnboardingFormStep.LOCATION]: (
       <LocationStep
         form={form}
-        setForm={setForm}
+        dispatch={dispatch}
         textFieldSize={textFieldSize}
         handleSliderChange={handleSliderChange}
       />
@@ -282,7 +364,7 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
     [OnboardingFormStep.UNIVERSITY]: (
       <UniversityStep
         form={form}
-        setForm={setForm}
+        dispatch={dispatch}
         textFieldSize={textFieldSize}
         handleSliderChange={handleSliderChange}
       />
@@ -290,7 +372,7 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
     [OnboardingFormStep.BUDGET]: (
       <BudgetStep
         form={form}
-        setForm={setForm}
+        dispatch={dispatch}
         textFieldSize={textFieldSize}
         handleSliderChange={handleSliderChange}
       />
@@ -298,12 +380,14 @@ export default function OnboardingFormQuestion(props: OnboardingFormQuestionProp
     [OnboardingFormStep.SCORES]: (
       <ScoresStep
         form={form}
-        setForm={setForm}
+        dispatch={dispatch}
         textFieldSize={textFieldSize}
         handleSliderChange={handleSliderChange}
       />
     ),
-    [OnboardingFormStep.REVIEW]: <ReviewStep form={form} />,
+    [OnboardingFormStep.REVIEW]: (
+      <ReviewStep form={form} setStep={setStep} />
+    ),
   };
 
   return formQuestions[step];

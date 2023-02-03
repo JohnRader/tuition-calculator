@@ -1,5 +1,5 @@
 export enum Route {
   HOME = '/',
-  BORROWER = '/borrower',
   REPORT = '/report',
+  LOAN_CALCULATOR = '/loan-calculator',
 }

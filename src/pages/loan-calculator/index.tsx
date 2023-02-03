@@ -5,11 +5,11 @@ import {
 import PageWrapper from '@/components/PageWrapper';
 import styles from '@/styles/index.module.css';
 
-export default function BorrowCalculatorPage() {
+export default function LoanCalculatorPage() {
   return (
     <>
       <Head>
-        <title>Borrow Calculator</title>
+        <title>Loan Calculator</title>
         <meta name="description" content="Borrow Calculator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -99,10 +99,8 @@ export default function BorrowCalculatorPage() {
                       $0
                     </Typography>
                   </Box>
-
                 </Grid>
               </Grid>
-
             </Grid>
           </Grid>
         </Box>

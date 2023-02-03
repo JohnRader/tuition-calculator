@@ -1,3 +1,4 @@
+/* Global form types */
 export enum FormAction {
   BACK = 'BACK',
   NEXT = 'NEXT',
@@ -6,18 +7,15 @@ export enum FormAction {
   SUBMIT = 'SUBMIT',
 }
 
-export type FormState = OnboardingFormState;
-
-export interface OnboardingFormState {
-  state: string;
-  city: string;
-  university: string;
-  budget: number;
-  major: string;
-  gpa?: number;
-  test_scores?: number;
+export interface FormInput {
+  step: number;
+  value: string | number;
+  errors: (string | undefined)[];
 }
 
+export type FormState = OnboardingFormState;
+
+/* OnboardingForm types */
 export enum OnboardingFormStep {
   LOCATION,
   UNIVERSITY,
@@ -25,3 +23,41 @@ export enum OnboardingFormStep {
   SCORES,
   REVIEW,
 }
+
+export enum OnboardingFormInput {
+  STATE = 'state',
+  CITY = 'city',
+  UNIVERSITY = 'university',
+  MAJOR = 'major',
+  BUDGET = 'budget',
+  GPA = 'gpa',
+  TEST_SCORES = 'test_scores',
+}
+
+export interface OnboardingFormState {
+  [OnboardingFormInput.STATE]: FormInput;
+  [OnboardingFormInput.CITY]: FormInput;
+  [OnboardingFormInput.UNIVERSITY]: FormInput;
+  [OnboardingFormInput.MAJOR]: FormInput;
+  [OnboardingFormInput.BUDGET]: FormInput;
+  [OnboardingFormInput.GPA]: FormInput;
+  [OnboardingFormInput.TEST_SCORES]: FormInput;
+}
+
+export enum OnboardingFormAction {
+  SET_FORM = 'SET_FORM',
+  VALIDATE_STEP = 'VALIDATE_STEP',
+}
+
+export type SetFormAction = {
+  type: OnboardingFormAction.SET_FORM;
+  input: OnboardingFormInput;
+  payload: string | number;
+};
+
+export type ValidateStepAction = {
+  type: OnboardingFormAction.VALIDATE_STEP;
+  step: OnboardingFormStep;
+};
+
+export type OnboardingFormActions = SetFormAction | ValidateStepAction;

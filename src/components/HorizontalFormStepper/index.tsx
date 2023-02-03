@@ -7,19 +7,20 @@ import type { SetStateAction } from 'react';
 
 import { useRouter } from 'next/router';
 import { toTitleCase } from '@/utils';
-import { FormAction } from '@/types';
 import { theme } from '@/styles/theme';
+import { FormAction } from '@/types';
 
 interface FormActionsProps {
   formActions: Record<FormAction, () => void>;
   stepNames: string[];
   currentStep: number;
   isStepOptional: (step: number) => boolean;
+  stepHasError: boolean;
 }
 
 function FormActions(props: FormActionsProps) {
   const {
-    formActions, stepNames, currentStep, isStepOptional,
+    formActions, stepNames, currentStep, isStepOptional, stepHasError,
   } = props;
 
   const isSummaryPage = currentStep === stepNames.length - 1;
@@ -43,6 +44,7 @@ function FormActions(props: FormActionsProps) {
             color="secondary"
             variant="contained"
             size="large"
+            disabled={stepHasError}
             onClick={formActions.SUBMIT}
             endIcon={<ArrowForwardIcon />}
           >
@@ -81,6 +83,7 @@ function FormActions(props: FormActionsProps) {
             onClick={formActions.NEXT}
             size="large"
             endIcon={<ArrowForwardIcon />}
+            disabled={stepHasError}
           >
             {currentStep === stepNames.length - 1 ? 'Finish' : 'Next'}
           </Button>
@@ -96,11 +99,12 @@ interface FormStepContentProps {
   currentStep: number;
   isStepOptional: (step: number) => boolean;
   currentStepContent: ReactNode;
+  stepHasError: boolean;
 }
 
 function FormStepContent(props: FormStepContentProps) {
   const {
-    formActions, currentStepContent, stepNames, currentStep, isStepOptional,
+    formActions, currentStepContent, stepNames, currentStep, isStepOptional, stepHasError,
   } = props;
 
   return (
@@ -132,6 +136,7 @@ function FormStepContent(props: FormStepContentProps) {
           currentStep={currentStep}
           formActions={formActions}
           isStepOptional={isStepOptional}
+          stepHasError={stepHasError}
         />
       </Box>
     </>
@@ -197,7 +202,7 @@ function FormStepper(props: FormStepperProps) {
       />
 
       <Stepper activeStep={currentStep} alternativeLabel>
-        {stepNames.map((label, index) => {
+        { stepNames.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: { optional?: ReactNode; } = {};
 
@@ -223,16 +228,24 @@ function FormStepper(props: FormStepperProps) {
 }
 
 interface HorizontalFormStepperProps {
-  currentStepContent: ReactNode;
   currentStep: number;
+  currentStepContent: ReactNode;
   setCurrentStep: (value: SetStateAction<number>) => void;
   stepNames: string[];
   optionalSteps: number[];
+  stepError: boolean;
+  validateStep: (value: number) => Promise<void>;
 }
 
 export default function HorizontalFormStepper(props: HorizontalFormStepperProps) {
   const {
-    stepNames, currentStep, currentStepContent, setCurrentStep, optionalSteps,
+    currentStep,
+    currentStepContent,
+    setCurrentStep,
+    stepNames,
+    optionalSteps,
+    stepError,
+    validateStep,
   } = props;
 
   const [skipped, setSkipped] = useState(new Set<number>());
@@ -242,14 +255,14 @@ export default function HorizontalFormStepper(props: HorizontalFormStepperProps)
   const isStepOptional = (step: number) => optionalSteps.includes(step);
   const isStepSkipped = (step: number) => skipped.has(step);
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    await validateStep(currentStep);
+
     let newSkipped = skipped;
     if (isStepSkipped(currentStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(currentStep);
     }
-
-    setCurrentStep((prevStep) => prevStep + 1);
     setSkipped(newSkipped);
   };
 
@@ -294,7 +307,7 @@ export default function HorizontalFormStepper(props: HorizontalFormStepperProps)
       flexDirection: 'column',
       justifyContent: 'flex-start',
       flexGrow: 1,
-      gap: theme.spacing(6),
+      gap: { xs: 0, md: theme.spacing(6) },
     }}
     >
       <FormStepper
@@ -310,6 +323,7 @@ export default function HorizontalFormStepper(props: HorizontalFormStepperProps)
         formActions={formActions}
         isStepOptional={isStepOptional}
         currentStepContent={currentStepContent}
+        stepHasError={stepError}
       />
     </Box>
   );

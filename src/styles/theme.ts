@@ -118,10 +118,10 @@ export const theme = {
         h4: {
           fontSize: '2.15rem',
           [breakpoints.down('md')]: {
-            fontSize: '1.5rem',
+            fontSize: '1.75rem',
           },
           [breakpoints.down('sm')]: {
-            fontSize: '1.15rem',
+            fontSize: '1.35rem',
           },
         },
       },
@@ -154,8 +154,10 @@ export const theme = {
     MuiTextField: {
       styleOverrides: {
         root: {
-          '& label.Mui-focused': {
-            color: 'rgb(var(--accent-blue-rgb-dark))',
+          '& label': {
+            '&.Mui-focused': {
+              color: 'rgb(var(--accent-blue-rgb-dark))',
+            },
           },
           '& .MuiInput-underline:after': {
             borderBottomColor: 'rgb(var(--accent-blue-rgb-dark))',

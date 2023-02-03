@@ -1,19 +1,16 @@
+import type { ComboBoxValue } from '@/types';
+
 export enum StateCode {
-  AA = 'AA',
-  AE = 'AE',
   AK = 'AK',
   AL = 'AL',
-  AP = 'AP',
   AR = 'AR',
   AZ = 'AZ',
   CA = 'CA',
   CO = 'CO',
   CT = 'CT',
-  DC = 'DC',
   DE = 'DE',
   FL = 'FL',
   GA = 'GA',
-  GU = 'GU',
   HI = 'HI',
   IA = 'IA',
   ID = 'ID',
@@ -25,11 +22,9 @@ export enum StateCode {
   MA = 'MA',
   MD = 'MD',
   ME = 'ME',
-  MH = 'MH',
   MI = 'MI',
   MN = 'MN',
   MO = 'MO',
-  MP = 'MP',
   MS = 'MS',
   MT = 'MT',
   NC = 'NC',
@@ -44,7 +39,6 @@ export enum StateCode {
   OK = 'OK',
   OR = 'OR',
   PA = 'PA',
-  PR = 'PR',
   RI = 'RI',
   SC = 'SC',
   SD = 'SD',
@@ -52,7 +46,6 @@ export enum StateCode {
   TX = 'TX',
   UT = 'UT',
   VA = 'VA',
-  VI = 'VI',
   VT = 'VT',
   WA = 'WA',
   WI = 'WI',
@@ -60,15 +53,15 @@ export enum StateCode {
   WY = 'WY',
 }
 
-export interface State {
-  stateCode: StateCode;
-  name: string;
+export interface State extends ComboBoxValue {
+  label: string;
+  value: StateCode;
 }
 
 export const StateCodeMap: Record<StateCode, string> = {
-  [StateCode.AZ]: 'Arizona',
   [StateCode.AL]: 'Alabama',
   [StateCode.AK]: 'Alaska',
+  [StateCode.AZ]: 'Arizona',
   [StateCode.AR]: 'Arkansas',
   [StateCode.CA]: 'California',
   [StateCode.CO]: 'Colorado',
@@ -116,14 +109,4 @@ export const StateCodeMap: Record<StateCode, string> = {
   [StateCode.WV]: 'West Virginia',
   [StateCode.WI]: 'Wisconsin',
   [StateCode.WY]: 'Wyoming',
-  [StateCode.DC]: 'District of Columbia',
-  [StateCode.AE]: 'Armed Forces Europe',
-  [StateCode.GU]: 'Guam',
-  [StateCode.MP]: 'Northern Mariana Islands',
-  [StateCode.PR]: 'Puerto Rico',
-  [StateCode.VI]: 'Virgin Islands',
-  [StateCode.AA]: 'Armed Forces (AA)',
-  [StateCode.AE]: 'Armed Forces (AE)',
-  [StateCode.AP]: 'Armed Forces (AP)',
-  [StateCode.MH]: 'Marshall Islands',
 };

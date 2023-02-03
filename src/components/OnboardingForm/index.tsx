@@ -12,6 +12,8 @@ import {
   OnboardingFormActions,
   OnboardingFormAction,
   FormInput,
+  State,
+  StateCode,
 } from '@/types';
 
 const formReducer = (state: OnboardingFormState, action: OnboardingFormActions) => {
@@ -42,7 +44,7 @@ export default function OnboardingForm() {
     },
     [OnboardingFormInput.STATE]: {
       step: OnboardingFormStep.LOCATION,
-      value: '',
+      value: { value: '' as StateCode, label: '' } satisfies State,
       errors: [],
     },
     [OnboardingFormInput.UNIVERSITY]: {
@@ -101,7 +103,7 @@ export default function OnboardingForm() {
 
   const optionalSteps = [OnboardingFormStep.SCORES];
 
-  const validateStep = async (currentStep: OnboardingFormStep) => {
+  const validateStep = (currentStep: OnboardingFormStep) => {
     dispatch({ type: OnboardingFormAction.VALIDATE_STEP, step: currentStep });
     setNext(true);
   };

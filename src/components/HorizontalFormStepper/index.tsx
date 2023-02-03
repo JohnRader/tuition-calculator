@@ -234,7 +234,7 @@ interface HorizontalFormStepperProps {
   stepNames: string[];
   optionalSteps: number[];
   stepError: boolean;
-  validateStep: (value: number) => Promise<void>;
+  validateStep: (value: number) => void;
 }
 
 export default function HorizontalFormStepper(props: HorizontalFormStepperProps) {
@@ -255,8 +255,8 @@ export default function HorizontalFormStepper(props: HorizontalFormStepperProps)
   const isStepOptional = (step: number) => optionalSteps.includes(step);
   const isStepSkipped = (step: number) => skipped.has(step);
 
-  const handleNext = async () => {
-    await validateStep(currentStep);
+  const handleNext = () => {
+    validateStep(currentStep);
 
     let newSkipped = skipped;
     if (isStepSkipped(currentStep)) {

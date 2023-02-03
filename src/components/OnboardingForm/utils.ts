@@ -1,10 +1,14 @@
-import { required, validGPA, validTestScore } from '@/utils/form-validation';
-import { OnboardingFormInput, OnboardingFormStep, OnboardingFormState } from '@/types';
+import {
+  requiredTextfield, requiredComboBox, validGPA, validTestScore,
+} from '@/utils/form-validation';
+import {
+  OnboardingFormInput, OnboardingFormStep, OnboardingFormState, State,
+} from '@/types';
 
 export const setForm = (
   state: OnboardingFormState,
   input: OnboardingFormInput,
-  payload: string | number,
+  payload: string | number | State,
 ) => {
   switch (input) {
     case OnboardingFormInput.CITY:
@@ -89,11 +93,15 @@ export const formValidation = (state: OnboardingFormState, action: OnboardingFor
         ...state,
         [OnboardingFormInput.CITY]: {
           ...state.city,
-          errors: required(state.city.value) ? [required(state.city.value)] : [],
+          errors: requiredTextfield(String(state.city.value))
+            ? [requiredTextfield(String(state.city.value))]
+            : [],
         },
         [OnboardingFormInput.STATE]: {
           ...state.state,
-          errors: required(state.state.value) ? [required(state.state.value)] : [],
+          errors: requiredComboBox(state.state.value as State)
+            ? [requiredComboBox(state.state.value as State)]
+            : [],
         },
       };
 
@@ -102,11 +110,15 @@ export const formValidation = (state: OnboardingFormState, action: OnboardingFor
         ...state,
         [OnboardingFormInput.UNIVERSITY]: {
           ...state.university,
-          errors: required(state.university.value) ? [required(state.university.value)] : [],
+          errors: requiredTextfield(String(state.university.value))
+            ? [requiredTextfield(String(state.university.value))]
+            : [],
         },
         [OnboardingFormInput.MAJOR]: {
           ...state.major,
-          errors: required(state.major.value) ? [required(state.major.value)] : [],
+          errors: requiredTextfield(String(state.major.value))
+            ? [requiredTextfield(String(state.major.value))]
+            : [],
         },
       };
 
@@ -124,12 +136,12 @@ export const formValidation = (state: OnboardingFormState, action: OnboardingFor
         ...state,
         [OnboardingFormInput.GPA]: {
           ...state.gpa,
-          errors: validGPA(state.gpa.value) ? [validGPA(state.gpa.value)] : [],
+          errors: validGPA(String(state.gpa.value)) ? [validGPA(String(state.gpa.value))] : [],
         },
         [OnboardingFormInput.TEST_SCORES]: {
           ...state.test_scores,
-          errors: validTestScore(state.test_scores.value)
-            ? [validTestScore(state.test_scores.value)]
+          errors: validTestScore(String(state.test_scores.value))
+            ? [validTestScore(String(state.test_scores.value))]
             : [],
         },
       };

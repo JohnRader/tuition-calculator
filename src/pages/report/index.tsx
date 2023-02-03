@@ -129,7 +129,7 @@ function ReportCalculations({
         {' '}
         living in
         {' '}
-        <strong>{`${city}, ${state.stateCode}`}</strong>
+        <strong>{`${city}, ${state.label}`}</strong>
       </Typography>
 
       <Button variant="text" onClick={() => setExpanded(!expanded)}>
@@ -240,9 +240,9 @@ export default function ReportPage() {
     university: 'University of California, Berkeley',
     city: 'Berkeley',
     state: {
-      name: StateCodeMap[StateCode.CA],
-      stateCode: StateCode.CA,
-    },
+      value: StateCodeMap[StateCode.CA],
+      label: StateCode.CA,
+    } as State,
     budget: 80000,
     householdIncome: 100000,
     costOfLiving: 100000,

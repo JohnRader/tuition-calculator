@@ -1,3 +1,5 @@
+import type { State } from '@/types';
+
 /* Global form types */
 export enum FormAction {
   BACK = 'BACK',
@@ -9,8 +11,13 @@ export enum FormAction {
 
 export interface FormInput {
   step: number;
-  value: string | number;
+  value: string | number | ComboBoxValue;
   errors: (string | undefined)[];
+}
+
+export interface ComboBoxValue {
+  label: string;
+  value: string;
 }
 
 export type FormState = OnboardingFormState;
@@ -52,7 +59,7 @@ export enum OnboardingFormAction {
 export type SetFormAction = {
   type: OnboardingFormAction.SET_FORM;
   input: OnboardingFormInput;
-  payload: string | number;
+  payload: string | number | State;
 };
 
 export type ValidateStepAction = {

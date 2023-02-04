@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material';
 const themeBase = createTheme({
   palette: {
     primary: {
-      main: '#292940',
+      main: '#282850',
     },
     secondary: {
       main: '#e53d6f',
@@ -21,8 +21,8 @@ const themeBase = createTheme({
       main: '#6791FE',
     },
     background: {
-      paper: '#fff',
-      default: '#292940',
+      paper: 'whitesmoke',
+      default: '#282850',
     },
     accentBlue: {
       main: '#6791FE',
@@ -64,7 +64,7 @@ export const theme = {
     MuiMobileStepper: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgb(var(--primary-rgb-light))',
+          backgroundColor: themeBase.palette.primary.light,
         },
         dotActive: {
           backgroundColor: 'rgb(var(--secondary-rgb-light))',
@@ -74,6 +74,7 @@ export const theme = {
     MuiStepIcon: {
       styleOverrides: {
         root: {
+          color: 'rgb(var(--primary-rgb-light))',
           '&.Mui-active': {
             color: 'rgb(var(--secondary-rgb))',
           },
@@ -82,6 +83,24 @@ export const theme = {
           },
           '&.Mui-error': {
             color: 'rgb(var(--error-rgb))',
+          },
+        },
+      },
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        root: {
+          '.MuiStepLabel-label': {
+            color: 'white',
+            '&.Mui-active': {
+              color: 'white',
+            },
+            '&.Mui-completed': {
+              color: 'white',
+            },
+          },
+          '.MuiTypography-caption': {
+            color: 'white',
           },
         },
       },

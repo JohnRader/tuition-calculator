@@ -31,10 +31,11 @@ function FormActions(props: FormActionsProps) {
         <>
           <Box sx={{ flex: '1 1 auto' }} />
           <Button
-            color="primary"
-            variant="outlined"
+            variant="contained"
             size="large"
-            sx={{ mr: 4, minWidth: '128px' }}
+            sx={{
+              mr: 4, minWidth: '128px', backgroundColor: 'whitesmoke', color: 'black',
+            }}
             onClick={formActions.RESET}
           >
             Reset
@@ -55,11 +56,12 @@ function FormActions(props: FormActionsProps) {
         <>
           {/* Back, Skip, and Next actions */}
           <Button
-            color="primary"
-            variant="outlined"
+            variant="contained"
             disabled={currentStep === 0}
             onClick={formActions.BACK}
-            sx={{ mr: 4, minWidth: '128px' }}
+            sx={{
+              mr: 4, minWidth: '128px', backgroundColor: 'whitesmoke', color: 'black',
+            }}
             size="large"
           >
             Back
@@ -67,10 +69,9 @@ function FormActions(props: FormActionsProps) {
           <Box sx={{ flex: '1 1 auto' }} />
           {isStepOptional(currentStep) && (
           <Button
-            color="primary"
             variant="text"
             onClick={formActions.SKIP}
-            sx={{ mr: 2, minWidth: '128px' }}
+            sx={{ mr: 2, minWidth: '128px', color: 'whitesmoke' }}
             size="large"
           >
             Skip

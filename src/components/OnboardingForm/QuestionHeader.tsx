@@ -64,7 +64,7 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
         />
       </Typography>
     ),
-    [OnboardingFormStep.REVIEW]: (<Typography variant="h3" textAlign="center">Review your info</Typography>),
+    [OnboardingFormStep.REVIEW]: (<Typography variant="h4" textAlign="center">Review your info</Typography>),
   };
 
   return questionHeaders[questionId];

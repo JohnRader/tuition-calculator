@@ -1,5 +1,5 @@
 import {
-  TextField, Slider, Typography, Box, Card, Slide, IconButton, Autocomplete,
+  TextField, Slider, Typography, Box, Card, Slide, IconButton, Autocomplete, Grow,
 } from '@mui/material';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { Edit } from '@mui/icons-material';
@@ -19,6 +19,7 @@ import {
   OnboardingFormAction,
 
 } from '@/types';
+import { theme } from '@/styles/theme';
 
 function classes(input: OnboardingFormInput) {
   const inputClasses: Record<OnboardingFormInput, string> = {
@@ -53,6 +54,7 @@ function LocationStep({
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
       <Card
+        variant="outlined"
         sx={{
           height: '400px',
           maxWidth: '600px',
@@ -128,6 +130,7 @@ function UniversityStep({
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
       <Card
+        variant="outlined"
         sx={{
           height: '400px',
           maxWidth: '600px',
@@ -186,6 +189,7 @@ function BudgetStep({
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
       <Card
+        variant="outlined"
         sx={{
           height: '400px',
           maxWidth: '600px',
@@ -235,6 +239,7 @@ function ScoresStep({
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
       <Card
+        variant="outlined"
         sx={{
           height: '400px',
           maxWidth: '600px',
@@ -304,16 +309,14 @@ function ReviewStep({
     return stepMap[stepName];
   };
 
-  const goToStep = (stepName: string) => {
-    const stepMap: Record<string, OnboardingFormStep> = {
-      LOCATION: OnboardingFormStep.LOCATION,
-      UNIVERSITY: OnboardingFormStep.UNIVERSITY,
-      BUDGET: OnboardingFormStep.BUDGET,
-      SCORES: OnboardingFormStep.SCORES,
-    };
-
-    return setStep(stepMap[stepName]);
+  const stepMap: Record<string, OnboardingFormStep> = {
+    LOCATION: OnboardingFormStep.LOCATION,
+    UNIVERSITY: OnboardingFormStep.UNIVERSITY,
+    BUDGET: OnboardingFormStep.BUDGET,
+    SCORES: OnboardingFormStep.SCORES,
   };
+
+  const goToStep = (stepName: string) => setStep(stepMap[stepName]);
 
   const stepNames = EnumKeysToArray(OnboardingFormStep);
 
@@ -330,36 +333,45 @@ function ReviewStep({
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap={4} flexGrow="1" alignItems="center" padding="0 1rem">
+    <Box
+      display="flex"
+      flexDirection="column"
+      gap={4}
+      flexGrow="1"
+      alignItems="center"
+      paddingX="1rem"
+      paddingBottom="2rem"
+    >
       <QuestionHeader questionId={OnboardingFormStep.REVIEW} />
       {stepNames.map((key) => (
         <Box key={key} sx={{ width: { xs: '100%', md: '600px' } }}>
           {
             key !== stepNames[stepNames.length - 1]
             && (
-            <Card variant="outlined" sx={{ padding: '1rem 2rem' }}>
-              <Box key={key} display="flex" flexGrow="1" flexDirection="column" gap={2}>
-                <Box display="flex" justifyContent="space-between" alignItems="center">
-                  <Typography variant="h4" color="secondary">
-                    {toTitleCase(key)}
-                  </Typography>
-                  <IconButton sx={{ ml: 2 }} onClick={() => goToStep(key)}><Edit color="primary" /></IconButton>
-                </Box>
-
-                { Object.entries(stepFormValues(key)).map(([formStateKey, formStateValue]) => (
-                  <Box key={`${formStateKey}`} display="flex" gap={1}>
-                    <Typography variant="body1">
-                      { toTitleCase(formStateKey) }
-                      :
+            <Grow in {...{ timeout: (stepMap[key] * 1000) }}>
+              <Card variant="outlined" sx={{ padding: '1rem 2rem' }}>
+                <Box key={key} display="flex" flexGrow="1" flexDirection="column" gap={2}>
+                  <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography variant="h5" color="secondary">
+                      {toTitleCase(key)}
                     </Typography>
-                    <Typography variant="body2">
-                      { stepValue(formStateKey, formStateValue) }
-                    </Typography>
+                    <IconButton sx={{ ml: 2 }} onClick={() => goToStep(key)}><Edit color="primary" /></IconButton>
                   </Box>
 
-                ))}
-              </Box>
-            </Card>
+                  { Object.entries(stepFormValues(key)).map(([formStateKey, formStateValue]) => (
+                    <Box key={`${formStateKey}`} display="flex" gap={1} alignItems="center">
+                      <Typography variant="body1">
+                        { toTitleCase(formStateKey) }
+                        :
+                      </Typography>
+                      <Typography variant="body2">
+                        { stepValue(formStateKey, formStateValue) }
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Card>
+            </Grow>
             )
           }
         </Box>

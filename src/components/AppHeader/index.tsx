@@ -26,6 +26,7 @@ import {
   MoreVert as MoreIcon,
   Calculate as CalculateIcon,
   School as SchoolIcon,
+  Home as HomeIcon,
 } from '@mui/icons-material';
 import {
   useState, MouseEvent, ReactElement, useEffect,
@@ -178,15 +179,23 @@ export default function AppHeader() {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <Typography variant="h5" padding="1rem">Tuition Calculator</Typography>
+      <Typography variant="h5" padding="1rem">App Name</Typography>
       <Divider />
       <List>
         <ListItem key={Route.HOME} disablePadding>
           <ListItemButton onClick={() => goToRoute(Route.HOME)}>
             <ListItemIcon>
-              <SchoolIcon />
+              <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={Route.TUITION_CALCULATOR} disablePadding>
+          <ListItemButton onClick={() => goToRoute(Route.TUITION_CALCULATOR)}>
+            <ListItemIcon>
+              <SchoolIcon />
+            </ListItemIcon>
+            <ListItemText primary="Tuition Calculator" />
           </ListItemButton>
         </ListItem>
         <ListItem key={Route.LOAN_CALCULATOR} disablePadding>

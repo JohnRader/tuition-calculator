@@ -53,7 +53,7 @@ export default function AppHeader() {
     <>
       {!!windowAfterSSR && (
       <HideOnScroll>
-        <AppBar sx={{ height: 'var(--app-header-height)' }} position="fixed" color="transparent">
+        <AppBar sx={{ height: 'var(--app-header-height)', backgroundColor: 'rgb(var(--background-rgb))' }} position="fixed">
           <Container maxWidth="lg">
             <Toolbar>
               <IconButton

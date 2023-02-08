@@ -11,7 +11,7 @@ import { State, StateCode, StateCodeMap } from '@/types';
 import { formatCurrency } from '@/utils';
 import { theme } from '@/styles/theme';
 
-const DonutChart = dynamic(() => import('@/components/DonutChart'), { ssr: false });
+const PieChart = dynamic(() => import('@/components/PieChart'), { ssr: false });
 
 interface ReportResults {
   major: string;
@@ -42,7 +42,7 @@ function ReportOverview({ results }: { results: ReportResults }) {
       color: theme.palette.error.main,
     },
     {
-      name: 'Total Budget',
+      name: 'Budget',
       value: budget + financialAid + scholarships,
       color: theme.palette.success.main,
     },
@@ -62,11 +62,7 @@ function ReportOverview({ results }: { results: ReportResults }) {
       >
         <Typography variant="h2" align="center"> Your Score </Typography>
 
-        <Typography variant="h4" align="center">
-          <strong> Average 80&#37; </strong>
-        </Typography>
-
-        <DonutChart slices={ResultsChartData} />
+        <PieChart slices={ResultsChartData} />
 
         <Typography variant="h6" component="h2">
           Based on your score, you will need to finance

@@ -20,7 +20,6 @@ import {
   formatCurrency, isMobile, toTitleCase, EnumKeysToArray,
 } from '@/utils';
 import {
-  State,
   TuitionROIFormState,
   TuitionROIFormStep,
   TuitionROIFormInput,
@@ -62,7 +61,7 @@ function UniversityStep({
       <Card
         variant="outlined"
         sx={{
-          height: '400px',
+          minHeight: '400px',
           maxWidth: '600px',
           flexGrow: 1,
           display: 'flex',
@@ -121,7 +120,7 @@ function BudgetStep({
       <Card
         variant="outlined"
         sx={{
-          height: '400px',
+          minHeight: '400px',
           maxWidth: '600px',
           flexGrow: 1,
           display: 'flex',
@@ -137,11 +136,6 @@ function BudgetStep({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            width: 'calc(100% - 4rem)',
-            padding: {
-              xs: '1rem',
-              md: '0',
-            },
             marginTop: {
               xs: '1rem',
             },
@@ -153,7 +147,7 @@ function BudgetStep({
               onChange={handleIncomeSliderChange}
               aria-labelledby="income"
               step={1000}
-              max={100000}
+              max={300000}
             />
             <Typography
               id="income"
@@ -224,7 +218,7 @@ function ScoresStep({
       <Card
         variant="outlined"
         sx={{
-          height: '400px',
+          minHeight: '400px',
           maxWidth: '600px',
           flexGrow: 1,
           display: 'flex',
@@ -282,9 +276,13 @@ function ReviewStep({
   setStep: (step: SetStateAction<TuitionROIFormStep>) => void;
 }) {
   const stepFormValues = (stepName: string) => {
-    const stepMap: Record<string, Record<string, string | number | State>> = {
+    const stepMap: Record<string, Record<string, string | number | boolean>> = {
       UNIVERSITY: { university: String(form.university.value), major: String(form.major.value) },
-      BUDGET: { budget: Number(form.budget.value) },
+      BUDGET: {
+        income: Number(form.income.value),
+        budget: Number(form.budget.value),
+        in_state: form.in_state.value ? 'Yes' : 'No',
+      },
       SCORES: { gpa: Number(form.gpa.value), test_scores: Number(form.test_scores.value) },
     };
 
@@ -301,16 +299,12 @@ function ReviewStep({
 
   const stepNames = EnumKeysToArray(TuitionROIFormStep);
 
-  const stepValue = (stepKey: string, value: string | number | State) => {
+  const stepValue = (stepKey: string, value: string | number | boolean) => {
     if (typeof value === 'number') {
-      return stepKey === 'budget' ? formatCurrency(value) : value;
+      return stepKey === 'budget' || stepKey === 'income' ? formatCurrency(value) : value;
     }
 
-    if (typeof value === 'string') {
-      return value;
-    }
-
-    return value.value;
+    return value;
   };
 
   return (

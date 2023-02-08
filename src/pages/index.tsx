@@ -37,32 +37,38 @@ export default function HomePage() {
           <Typography variant="h6" gutterBottom>
             Extra body copy — description of what we do; value proposition, etc.
           </Typography>
+
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}>
               <Card variant="outlined" sx={{ padding: '2rem' }}>
-                <Typography variant="h6" gutterBottom>
-                  Calulcate your Tuition
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                  Use our tuition calculator to estimate your tuition based on your budget,
-                  choice of school, and more.
-                </Typography>
-                <Button color="primary" variant="contained" onClick={() => router.push(Route.TUITION_CALCULATOR)}>
-                  Tuition Calculator
-                </Button>
+                <Box>
+                  <Typography variant="h6" gutterBottom>
+                    Calulcate your Tuition
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Use our tuition calculator to estimate your tuition based on your budget,
+                    choice of school, and more.
+                  </Typography>
+                  <Button sx={{ marginTop: '2rem' }} color="primary" variant="contained" onClick={() => router.push(Route.TUITION_CALCULATOR)}>
+                    Tuition Calculator
+                  </Button>
+                </Box>
               </Card>
             </Grid>
+
             <Grid item xs={12} md={6}>
               <Card variant="outlined" sx={{ padding: '2rem' }}>
-                <Typography variant="h6" gutterBottom>
-                  Calculate your Financial Aid
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                  Use our loan calculator to estimate your loan amount based on your budget.
-                </Typography>
-                <Button color="primary" variant="contained" onClick={() => router.push(Route.LOAN_CALCULATOR)}>
-                  Loan Calculator
-                </Button>
+                <Box>
+                  <Typography variant="h6" gutterBottom>
+                    Calculate your Financial Aid
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Use our loan calculator to estimate your loan amount based on your budget.
+                  </Typography>
+                  <Button sx={{ marginTop: '2rem' }} color="primary" variant="contained" onClick={() => router.push(Route.LOAN_CALCULATOR)}>
+                    Loan Calculator
+                  </Button>
+                </Box>
               </Card>
             </Grid>
           </Grid>

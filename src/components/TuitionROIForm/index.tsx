@@ -47,7 +47,7 @@ export default function TuitionROIForm() {
     },
     [TuitionROIFormInput.INCOME]: {
       step: TuitionROIFormStep.BUDGET,
-      value: 15000,
+      value: 30000,
       errors: [],
     },
     [TuitionROIFormInput.IN_STATE]: {
@@ -108,7 +108,7 @@ export default function TuitionROIForm() {
 
   return (
     <FormControl
-      sx={{ padding: '2rem 0', display: 'flex' }}
+      sx={{ padding: '2rem 0', display: 'flex', height: '100%' }}
     >
       <HorizontalFormStepper
         currentStep={step}

@@ -26,7 +26,17 @@ function FormActions(props: FormActionsProps) {
   const isSummaryPage = currentStep === stepNames.length - 1;
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+    <Box
+      sx={{
+        display: {
+          xs: 'none',
+          sm: 'flex',
+        },
+        flexDirection: 'row',
+        pt: 2,
+        gap: '3rem',
+      }}
+    >
       { isSummaryPage ? (
         <>
           <Box sx={{ flex: '1 1 auto' }} />
@@ -98,52 +108,24 @@ function FormActions(props: FormActionsProps) {
 }
 
 interface FormStepContentProps {
-  formActions: Record<FormAction, () => void>;
-  stepNames: string[];
-  currentStep: number;
-  isStepOptional: (step: number) => boolean;
   currentStepContent: ReactNode;
-  stepHasError: boolean;
 }
 
 function FormStepContent(props: FormStepContentProps) {
-  const {
-    formActions, currentStepContent, stepNames, currentStep, isStepOptional, stepHasError,
-  } = props;
+  const { currentStepContent } = props;
 
   return (
-    <>
-      <Box sx={{
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        paddingTop: {
-          xs: '1rem',
-          sm: '0',
-        },
-      }}
-      >
-        {currentStepContent}
-      </Box>
-
-      <Box sx={{
-        display: {
-          xs: 'none',
-          sm: 'flex',
-        },
-        flexDirection: 'column',
-        gap: '3rem',
-      }}
-      >
-        <FormActions
-          stepNames={stepNames}
-          currentStep={currentStep}
-          formActions={formActions}
-          isStepOptional={isStepOptional}
-          stepHasError={stepHasError}
-        />
-      </Box>
-    </>
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      paddingTop: {
+        xs: '1rem',
+        sm: '0',
+      },
+    }}
+    >
+      {currentStepContent}
+    </Box>
   );
 }
 
@@ -312,7 +294,7 @@ export default function HorizontalFormStepper(props: HorizontalFormStepperProps)
       flexDirection: 'column',
       justifyContent: 'flex-start',
       flexGrow: 1,
-      gap: { xs: 0, md: theme.spacing(6) },
+      gap: theme.spacing(6),
     }}
     >
       <FormStepper
@@ -322,14 +304,16 @@ export default function HorizontalFormStepper(props: HorizontalFormStepperProps)
         isStepOptional={isStepOptional}
         isStepSkipped={isStepSkipped}
       />
-      <FormStepContent
-        stepNames={stepNames}
-        currentStep={currentStep}
-        formActions={formActions}
-        isStepOptional={isStepOptional}
-        currentStepContent={currentStepContent}
-        stepHasError={stepError}
-      />
+      <Box display="flex" flexDirection="column" flexGrow={1} justifyContent="space-between">
+        <FormStepContent currentStepContent={currentStepContent} />
+        <FormActions
+          stepNames={stepNames}
+          currentStep={currentStep}
+          formActions={formActions}
+          isStepOptional={isStepOptional}
+          stepHasError={stepError}
+        />
+      </Box>
     </Box>
   );
 }

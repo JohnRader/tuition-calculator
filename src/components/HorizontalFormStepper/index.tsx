@@ -31,10 +31,11 @@ function FormActions(props: FormActionsProps) {
         <>
           <Box sx={{ flex: '1 1 auto' }} />
           <Button
+            color="secondary"
             variant="contained"
             size="large"
             sx={{
-              mr: 4, minWidth: '128px', backgroundColor: 'whitesmoke', color: 'black',
+              mr: 4, minWidth: '128px',
             }}
             onClick={formActions.RESET}
           >
@@ -42,7 +43,7 @@ function FormActions(props: FormActionsProps) {
           </Button>
           <Button
             sx={{ minWidth: '128px' }}
-            color="secondary"
+            color="primary"
             variant="contained"
             size="large"
             disabled={stepHasError}
@@ -57,10 +58,11 @@ function FormActions(props: FormActionsProps) {
           {/* Back, Skip, and Next actions */}
           <Button
             variant="contained"
+            color="secondary"
             disabled={currentStep === 0}
             onClick={formActions.BACK}
             sx={{
-              mr: 4, minWidth: '128px', backgroundColor: 'whitesmoke', color: 'black',
+              mr: 4, minWidth: '128px',
             }}
             size="large"
           >
@@ -69,9 +71,10 @@ function FormActions(props: FormActionsProps) {
           <Box sx={{ flex: '1 1 auto' }} />
           {isStepOptional(currentStep) && (
           <Button
-            variant="text"
+            variant="contained"
+            color="secondary"
             onClick={formActions.SKIP}
-            sx={{ mr: 2, minWidth: '128px', color: 'whitesmoke' }}
+            sx={{ mr: 2, minWidth: '128px' }}
             size="large"
           >
             Skip
@@ -79,7 +82,7 @@ function FormActions(props: FormActionsProps) {
           )}
           <Button
             sx={{ minWidth: '128px' }}
-            color="secondary"
+            color="primary"
             variant="contained"
             onClick={formActions.NEXT}
             size="large"
@@ -169,6 +172,7 @@ function FormStepper(props: FormStepperProps) {
   return (
     <>
       <MobileStepper
+        color="primary"
         sx={{
           display: { xs: 'flex', sm: 'none' },
           padding: theme.spacing(2),
@@ -177,7 +181,7 @@ function FormStepper(props: FormStepperProps) {
         backButton={(
           <Button
             sx={{ minWidth: '96px' }}
-            color="primary"
+            color="secondary"
             variant="contained"
             disabled={currentStep === 0}
             onClick={isSummaryStep() ? formActions.RESET : formActions.BACK}
@@ -189,7 +193,7 @@ function FormStepper(props: FormStepperProps) {
         nextButton={(
           <Button
             sx={{ minWidth: '96px' }}
-            color="secondary"
+            color="primary"
             variant="contained"
             onClick={isSummaryStep() ? formActions.SUBMIT : formActions.NEXT}
             size="small"

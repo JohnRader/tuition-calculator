@@ -3,22 +3,22 @@ import { createTheme } from '@mui/material';
 const themeBase = createTheme({
   palette: {
     primary: {
-      main: '#282850',
+      main: '#EB6662',
     },
     secondary: {
-      main: '#e53d6f',
+      main: '#f5f5f5',
     },
     success: {
-      main: '#00B289',
+      main: '#23CE6B',
     },
     error: {
       main: '#C91B3B',
     },
     warning: {
-      main: '#F9A828',
+      main: '#F3B700',
     },
     info: {
-      main: '#6791FE',
+      main: '#3772FF',
     },
     background: {
       paper: 'whitesmoke',
@@ -26,18 +26,18 @@ const themeBase = createTheme({
     },
     accentBlue: {
       main: '#6791FE',
-      dark: '#3C5E9F',
-      light: '#A6C0FE',
+      dark: '#4865B1',
+      light: '#85A7FE',
     },
-    accentPink: {
-      main: '#EB6662',
-      dark: '#B8332F',
-      light: '#FF9995',
+    accentPurple: {
+      main: '#736CED',
+      dark: '#504BA5',
+      light: '#8F89F0',
     },
     accentTeal: {
-      main: '#51BBD2',
-      dark: '#1E889F',
-      light: '#84EEFF',
+      main: '#388697',
+      dark: '#275C68',
+      light: '#6AB7C8',
     },
   },
   typography: {
@@ -54,6 +54,20 @@ const { breakpoints } = themeBase;
 export const theme = {
   ...themeBase,
   components: {
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          color: 'rgb(var(--secondary-rgb))',
+          backgroundColor: 'rgb(var(--background-rgb))',
+          '.MuiListItemIcon-root': {
+            color: 'rgb(var(--secondary-rgb))',
+          },
+          '.MuiDivider-root': {
+            borderColor: 'rgb(var(--secondary-rgb))',
+          },
+        },
+      },
+    },
     MuiSlider: {
       styleOverrides: {
         root: {
@@ -61,22 +75,15 @@ export const theme = {
         },
       },
     },
-    MuiMobileStepper: {
-      styleOverrides: {
-        root: {
-          backgroundColor: themeBase.palette.primary.light,
-        },
-        dotActive: {
-          backgroundColor: 'rgb(var(--secondary-rgb-light))',
-        },
-      },
-    },
     MuiStepIcon: {
       styleOverrides: {
         root: {
-          color: 'rgb(var(--primary-rgb-light))',
+          color: 'rgb(var(--secondary-rgb))',
+          '.MuiStepIcon-text': {
+            fill: 'rgb(var(--background-rgb))',
+          },
           '&.Mui-active': {
-            color: 'rgb(var(--secondary-rgb))',
+            color: 'rgb(var(--primary-rgb))',
           },
           '&.Mui-completed': {
             color: 'rgb(var(--success-rgb))',

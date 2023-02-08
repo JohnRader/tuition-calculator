@@ -3,25 +3,23 @@ import { FormControl } from '@mui/material';
 
 import { setForm, formValidation } from './utils';
 import HorizontalFormStepper from '@/components/HorizontalFormStepper';
-import OnboardingFormQuestion from './FormQuestion';
+import TuitionROIFormQuestion from './FormQuestion';
 import { EnumKeysToArray } from '@/utils';
 import {
-  OnboardingFormInput,
-  OnboardingFormState,
-  OnboardingFormStep,
-  OnboardingFormActions,
-  OnboardingFormAction,
+  TuitionROIFormInput,
+  TuitionROIFormState,
+  TuitionROIFormStep,
+  TuitionROIFormActions,
+  TuitionROIFormAction,
   FormInput,
-  State,
-  StateCode,
 } from '@/types';
 
-const formReducer = (state: OnboardingFormState, action: OnboardingFormActions) => {
+const formReducer = (state: TuitionROIFormState, action: TuitionROIFormActions) => {
   switch (action.type) {
-    case OnboardingFormAction.SET_FORM:
+    case TuitionROIFormAction.SET_FORM:
       return setForm(state, action.input, action.payload);
 
-    case OnboardingFormAction.VALIDATE_STEP:
+    case TuitionROIFormAction.VALIDATE_STEP:
       return formValidation(state, action.step);
 
     default:
@@ -29,50 +27,50 @@ const formReducer = (state: OnboardingFormState, action: OnboardingFormActions) 
   }
 };
 
-export default function OnboardingForm() {
-  const [step, setStep] = useState<OnboardingFormStep>(OnboardingFormStep.LOCATION);
+export default function TuitionROIForm() {
+  const [step, setStep] = useState<TuitionROIFormStep>(TuitionROIFormStep.UNIVERSITY);
 
   const [next, setNext] = useState(false);
 
   const [stepError, setStepError] = useState(false);
 
   const [form, dispatch] = useReducer(formReducer, {
-    [OnboardingFormInput.CITY]: {
-      step: OnboardingFormStep.LOCATION,
+    [TuitionROIFormInput.UNIVERSITY]: {
+      step: TuitionROIFormStep.UNIVERSITY,
       value: '',
       errors: [],
     },
-    [OnboardingFormInput.STATE]: {
-      step: OnboardingFormStep.LOCATION,
-      value: { value: '' as StateCode, label: '' } satisfies State,
-      errors: [],
-    },
-    [OnboardingFormInput.UNIVERSITY]: {
-      step: OnboardingFormStep.UNIVERSITY,
+    [TuitionROIFormInput.MAJOR]: {
+      step: TuitionROIFormStep.UNIVERSITY,
       value: '',
       errors: [],
     },
-    [OnboardingFormInput.MAJOR]: {
-      step: OnboardingFormStep.UNIVERSITY,
-      value: '',
-      errors: [],
-    },
-    [OnboardingFormInput.BUDGET]: {
-      step: OnboardingFormStep.BUDGET,
+    [TuitionROIFormInput.INCOME]: {
+      step: TuitionROIFormStep.BUDGET,
       value: 15000,
       errors: [],
     },
-    [OnboardingFormInput.GPA]: {
-      step: OnboardingFormStep.SCORES,
-      value: '',
+    [TuitionROIFormInput.IN_STATE]: {
+      step: TuitionROIFormStep.BUDGET,
+      value: true,
       errors: [],
     },
-    [OnboardingFormInput.TEST_SCORES]: {
-      step: OnboardingFormStep.SCORES,
-      value: '',
+    [TuitionROIFormInput.BUDGET]: {
+      step: TuitionROIFormStep.BUDGET,
+      value: 15000,
       errors: [],
     },
-  } as OnboardingFormState);
+    [TuitionROIFormInput.GPA]: {
+      step: TuitionROIFormStep.SCORES,
+      value: null,
+      errors: [],
+    },
+    [TuitionROIFormInput.TEST_SCORES]: {
+      step: TuitionROIFormStep.SCORES,
+      value: null,
+      errors: [],
+    },
+  } as TuitionROIFormState);
 
   const handleNext = (isNext: boolean) => {
     if (isNext) {
@@ -95,16 +93,16 @@ export default function OnboardingForm() {
     }
   }, [form, step]);
 
-  const steps = EnumKeysToArray(OnboardingFormStep);
+  const steps = EnumKeysToArray(TuitionROIFormStep);
 
-  const stepContent = OnboardingFormQuestion({
+  const stepContent = TuitionROIFormQuestion({
     step, setStep, form, dispatch,
   });
 
-  const optionalSteps = [OnboardingFormStep.SCORES];
+  const optionalSteps = [TuitionROIFormStep.SCORES];
 
-  const validateStep = (currentStep: OnboardingFormStep) => {
-    dispatch({ type: OnboardingFormAction.VALIDATE_STEP, step: currentStep });
+  const validateStep = (currentStep: TuitionROIFormStep) => {
+    dispatch({ type: TuitionROIFormAction.VALIDATE_STEP, step: currentStep });
     setNext(true);
   };
 

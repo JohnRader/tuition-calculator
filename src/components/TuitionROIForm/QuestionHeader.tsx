@@ -1,24 +1,10 @@
 import { Typography, Chip } from '@mui/material';
-import { OnboardingFormStep } from '@/types';
+import { TuitionROIFormStep } from '@/types';
 import { theme } from '@/styles/theme';
 
-export default function QuestionHeader({ questionId }: { questionId: OnboardingFormStep }) {
+export default function QuestionHeader({ questionId }: { questionId: TuitionROIFormStep }) {
   const questionHeaders = {
-    [OnboardingFormStep.LOCATION]: (
-      <Typography variant="h5" gutterBottom>
-        Which
-        {' '}
-        <strong>city</strong>
-        {' '}
-        and
-        {' '}
-        <strong>state</strong>
-        {' '}
-        do you currently reside in?
-
-      </Typography>
-    ),
-    [OnboardingFormStep.UNIVERSITY]: (
+    [TuitionROIFormStep.UNIVERSITY]: (
       <Typography variant="h5" gutterBottom>
         Which
         {' '}
@@ -32,14 +18,18 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
         {' '}
         in?
       </Typography>),
-    [OnboardingFormStep.BUDGET]: (
+    [TuitionROIFormStep.BUDGET]: (
       <Typography variant="h5" gutterBottom>
-        What is your estimated annual
+        What is your estimated annual household
+        {' '}
+        <strong>income</strong>
+        {' '}
+        and
         {' '}
         <strong>budget</strong>
         ?
       </Typography>),
-    [OnboardingFormStep.SCORES]: (
+    [TuitionROIFormStep.SCORES]: (
       <Typography variant="h5" gutterBottom>
 
         What is your
@@ -55,7 +45,7 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
           sx={{
             width: '80px',
             color: 'black',
-            backgroundColor: 'rgb(var(--secondary-rgb), .4)',
+            backgroundColor: 'rgb(var(--primary-rgb), .4)',
             marginLeft: theme.spacing(1),
           }}
           size="small"
@@ -64,7 +54,7 @@ export default function QuestionHeader({ questionId }: { questionId: OnboardingF
         />
       </Typography>
     ),
-    [OnboardingFormStep.REVIEW]: (<Typography variant="h4" textAlign="center">Review your info</Typography>),
+    [TuitionROIFormStep.REVIEW]: (<Typography variant="h4" textAlign="center">Review your info</Typography>),
   };
 
   return questionHeaders[questionId];

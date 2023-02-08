@@ -1,5 +1,3 @@
-import type { State } from '@/types';
-
 /* Global form types */
 export enum FormAction {
   BACK = 'BACK',
@@ -11,7 +9,7 @@ export enum FormAction {
 
 export interface FormInput {
   step: number;
-  value: string | number | ComboBoxValue;
+  value: string | number | boolean | null;
   errors: (string | undefined)[];
 }
 
@@ -20,51 +18,50 @@ export interface ComboBoxValue {
   value: string;
 }
 
-export type FormState = OnboardingFormState;
+export type FormState = TuitionROIFormState;
 
 /* OnboardingForm types */
-export enum OnboardingFormStep {
-  LOCATION,
+export enum TuitionROIFormStep {
   UNIVERSITY,
   BUDGET,
   SCORES,
   REVIEW,
 }
 
-export enum OnboardingFormInput {
-  STATE = 'state',
-  CITY = 'city',
+export enum TuitionROIFormInput {
   UNIVERSITY = 'university',
+  IN_STATE = 'in_state',
   MAJOR = 'major',
+  INCOME = 'income',
   BUDGET = 'budget',
   GPA = 'gpa',
   TEST_SCORES = 'test_scores',
 }
 
-export interface OnboardingFormState {
-  [OnboardingFormInput.STATE]: FormInput;
-  [OnboardingFormInput.CITY]: FormInput;
-  [OnboardingFormInput.UNIVERSITY]: FormInput;
-  [OnboardingFormInput.MAJOR]: FormInput;
-  [OnboardingFormInput.BUDGET]: FormInput;
-  [OnboardingFormInput.GPA]: FormInput;
-  [OnboardingFormInput.TEST_SCORES]: FormInput;
+export interface TuitionROIFormState {
+  [TuitionROIFormInput.UNIVERSITY]: FormInput;
+  [TuitionROIFormInput.MAJOR]: FormInput;
+  [TuitionROIFormInput.INCOME]: FormInput;
+  [TuitionROIFormInput.IN_STATE]: FormInput;
+  [TuitionROIFormInput.BUDGET]: FormInput;
+  [TuitionROIFormInput.GPA]: FormInput;
+  [TuitionROIFormInput.TEST_SCORES]: FormInput;
 }
 
-export enum OnboardingFormAction {
+export enum TuitionROIFormAction {
   SET_FORM = 'SET_FORM',
   VALIDATE_STEP = 'VALIDATE_STEP',
 }
 
 export type SetFormAction = {
-  type: OnboardingFormAction.SET_FORM;
-  input: OnboardingFormInput;
-  payload: string | number | State;
+  type: TuitionROIFormAction.SET_FORM;
+  input: TuitionROIFormInput;
+  payload: string | number | boolean;
 };
 
 export type ValidateStepAction = {
-  type: OnboardingFormAction.VALIDATE_STEP;
-  step: OnboardingFormStep;
+  type: TuitionROIFormAction.VALIDATE_STEP;
+  step: TuitionROIFormStep;
 };
 
-export type OnboardingFormActions = SetFormAction | ValidateStepAction;
+export type TuitionROIFormActions = SetFormAction | ValidateStepAction;

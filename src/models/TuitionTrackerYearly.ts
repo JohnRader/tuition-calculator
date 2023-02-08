@@ -1,0 +1,31 @@
+export interface TuitionTrackerYearly {
+  year: string;
+  price_instate_oncampus?: number;
+  price_instate_offcampus_nofamily?: number;
+  avg_net_price_0_30000_titleiv_privateforprofit?: number;
+  avg_net_price_30001_48000_titleiv_privateforprofit?: number;
+  avg_net_price_48001_75000_titleiv_privateforprofit?: number;
+  avg_net_price_75001_110000_titleiv_privateforprofit?: number;
+  avg_net_price_110001_titleiv_privateforprofit?: number;
+  full_time_retention_rate?: number;
+  part_time_retention_rate?: number;
+  grad_rate_associate_3years_total?: number;
+  grad_rate_associate_3years_white?: number;
+  grad_rate_associate_3years_black?: number;
+  grad_rate_associate_3years_hisp?: number;
+  grad_rate_associate_3years_amerindalasknat?: number;
+  grad_rate_associate_3years_unknown?: number;
+  grad_rate_associate_3years_asian?: number;
+  grad_rate_associate_3years_nathawpacisl?: number;
+  grad_rate_associate_3years_twomore?: number;
+  grad_rate_bachelors_6years_total?: number;
+  grad_rate_bachelors_6years_white?: number;
+  grad_rate_bachelors_6years_black?: number;
+  grad_rate_bachelors_6years_hisp?: number;
+  grad_rate_bachelors_6years_amerindalasknat?: number;
+  grad_rate_bachelors_6years_unknown?: number;
+  grad_rate_bachelors_6years_twomore?: number;
+  grad_rate_bachelors_6years_asian?: number;
+  grad_rate_bachelors_6years_nathawpacisl?: number;
+  unitid: number;
+}

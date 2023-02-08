@@ -1,80 +1,80 @@
 import {
-  requiredTextfield, requiredComboBox, validGPA, validTestScore,
+  requiredTextfield, validGPA, validTestScore,
 } from '@/utils/form-validation';
 import {
-  OnboardingFormInput, OnboardingFormStep, OnboardingFormState, State,
+  TuitionROIFormInput, TuitionROIFormStep, TuitionROIFormState,
 } from '@/types';
 
 export const setForm = (
-  state: OnboardingFormState,
-  input: OnboardingFormInput,
-  payload: string | number | State,
+  state: TuitionROIFormState,
+  input: TuitionROIFormInput,
+  payload: string | number | boolean | null,
 ) => {
   switch (input) {
-    case OnboardingFormInput.CITY:
+    case TuitionROIFormInput.UNIVERSITY:
       return {
         ...state,
-        [OnboardingFormInput.CITY]: {
-          ...state.city,
-          value: payload,
-          errors: [],
-        },
-      };
-
-    case OnboardingFormInput.STATE:
-      return {
-        ...state,
-        [OnboardingFormInput.STATE]: {
-          ...state.state,
-          value: payload,
-          errors: [],
-        },
-      };
-
-    case OnboardingFormInput.UNIVERSITY:
-      return {
-        ...state,
-        [OnboardingFormInput.UNIVERSITY]: {
+        [TuitionROIFormInput.UNIVERSITY]: {
           ...state.university,
           value: payload,
           errors: [],
         },
       };
 
-    case OnboardingFormInput.MAJOR:
+    case TuitionROIFormInput.MAJOR:
       return {
         ...state,
-        [OnboardingFormInput.MAJOR]: {
+        [TuitionROIFormInput.MAJOR]: {
           ...state.major,
           value: payload,
           errors: [],
         },
       };
 
-    case OnboardingFormInput.BUDGET:
+    case TuitionROIFormInput.INCOME:
       return {
         ...state,
-        [OnboardingFormInput.BUDGET]: {
+        [TuitionROIFormInput.INCOME]: {
+          ...state.income,
+          value: payload,
+          errors: [],
+        },
+      };
+
+    case TuitionROIFormInput.BUDGET:
+      return {
+        ...state,
+        [TuitionROIFormInput.BUDGET]: {
           ...state.budget,
           value: payload,
           errors: [],
         },
       };
 
-    case OnboardingFormInput.GPA:
+    case TuitionROIFormInput.IN_STATE:
       return {
         ...state,
-        [OnboardingFormInput.GPA]: {
+        [TuitionROIFormInput.IN_STATE]: {
+          ...state.in_state,
+          value: payload,
+          errors: [],
+        },
+      };
+
+    case TuitionROIFormInput.GPA:
+      return {
+        ...state,
+        [TuitionROIFormInput.GPA]: {
           ...state.gpa,
           value: payload,
           errors: [],
         },
       };
 
-    case OnboardingFormInput.TEST_SCORES:
+    case TuitionROIFormInput.TEST_SCORES:
       return {
         ...state,
-        [OnboardingFormInput.TEST_SCORES]: {
+        [TuitionROIFormInput.TEST_SCORES]: {
           ...state.test_scores,
           value: payload,
           errors: [],
@@ -86,35 +86,18 @@ export const setForm = (
   }
 };
 
-export const formValidation = (state: OnboardingFormState, action: OnboardingFormStep) => {
+export const formValidation = (state: TuitionROIFormState, action: TuitionROIFormStep) => {
   switch (action) {
-    case OnboardingFormStep.LOCATION:
+    case TuitionROIFormStep.UNIVERSITY:
       return {
         ...state,
-        [OnboardingFormInput.CITY]: {
-          ...state.city,
-          errors: requiredTextfield(String(state.city.value))
-            ? [requiredTextfield(String(state.city.value))]
-            : [],
-        },
-        [OnboardingFormInput.STATE]: {
-          ...state.state,
-          errors: requiredComboBox(state.state.value as State)
-            ? [requiredComboBox(state.state.value as State)]
-            : [],
-        },
-      };
-
-    case OnboardingFormStep.UNIVERSITY:
-      return {
-        ...state,
-        [OnboardingFormInput.UNIVERSITY]: {
+        [TuitionROIFormInput.UNIVERSITY]: {
           ...state.university,
           errors: requiredTextfield(String(state.university.value))
             ? [requiredTextfield(String(state.university.value))]
             : [],
         },
-        [OnboardingFormInput.MAJOR]: {
+        [TuitionROIFormInput.MAJOR]: {
           ...state.major,
           errors: requiredTextfield(String(state.major.value))
             ? [requiredTextfield(String(state.major.value))]
@@ -122,23 +105,23 @@ export const formValidation = (state: OnboardingFormState, action: OnboardingFor
         },
       };
 
-    case OnboardingFormStep.BUDGET:
+    case TuitionROIFormStep.BUDGET:
       return {
         ...state,
-        [OnboardingFormInput.BUDGET]: {
+        [TuitionROIFormInput.BUDGET]: {
           ...state.budget,
           errors: [],
         },
       };
 
-    case OnboardingFormStep.SCORES:
+    case TuitionROIFormStep.SCORES:
       return {
         ...state,
-        [OnboardingFormInput.GPA]: {
+        [TuitionROIFormInput.GPA]: {
           ...state.gpa,
           errors: validGPA(String(state.gpa.value)) ? [validGPA(String(state.gpa.value))] : [],
         },
-        [OnboardingFormInput.TEST_SCORES]: {
+        [TuitionROIFormInput.TEST_SCORES]: {
           ...state.test_scores,
           errors: validTestScore(String(state.test_scores.value))
             ? [validTestScore(String(state.test_scores.value))]

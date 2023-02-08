@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMediaQuery } from '@mui/material';
 import { theme } from '@/styles/theme';
-import { TitleCase } from '@/types';
+import { TitleCase, Route } from '@/types';
+
+const nonHeaderRoutes = [Route.TUITION_CALCULATOR];
+
+export const showHeader = (route: Route) => !nonHeaderRoutes.includes(route);
 
 export const StringIsNumber = (value: any) => isNaN(Number(value)) === false;
 

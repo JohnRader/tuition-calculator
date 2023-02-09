@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMediaQuery } from '@mui/material';
 import { theme } from '@/styles/theme';
-import { TitleCase, Route } from '@/types';
+import { TitleCase } from '@/types';
+import { Route } from '@/utils/routes';
 
 const nonHeaderRoutes = [Route.TUITION_CALCULATOR];
 

@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
 import { Container } from '@mui/material';
 import { useRouter } from 'next/router';
-import { showHeader } from '@/utils';
-import { Route } from '@/types';
+import { showHeader, Route } from '@/utils';
 
 interface PageProps {
   page: ReactNode;

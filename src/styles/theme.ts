@@ -41,15 +41,19 @@ const themeBase = createTheme({
     },
   },
   typography: {
-    fontFamily: ['Raleway', 'arial'].join(','),
-    fontWeightLight: 300,
-    fontWeightRegular: 400,
-    fontWeightMedium: 500,
-    fontWeightBold: 700,
+    fontFamily: [
+      'Raleway',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      '"Helvetica Neue"',
+      'Arial',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
 });
-
-const { breakpoints } = themeBase;
 
 export const theme = {
   ...themeBase,
@@ -115,40 +119,24 @@ export const theme = {
     MuiTypography: {
       styleOverrides: {
         h1: {
-          fontSize: '6rem',
-          [breakpoints.down('md')]: {
-            fontSize: '5.35rem',
-          },
-          [breakpoints.down('sm')]: {
-            fontSize: '5rem',
-          },
+          fontWeight: 900,
+          letterSpacing: '-0.02em',
         },
         h2: {
-          fontSize: '3.75rem',
-          [breakpoints.down('md')]: {
-            fontSize: '3.1rem',
-          },
-          [breakpoints.down('sm')]: {
-            fontSize: '2.75rem',
-          },
+          fontWeight: 900,
+          letterSpacing: '-0.02em',
         },
         h3: {
-          fontSize: '3rem',
-          [breakpoints.down('md')]: {
-            fontSize: '2.35rem',
-          },
-          [breakpoints.down('sm')]: {
-            fontSize: '2.10rem',
-          },
+          fontWeight: 800,
+          letterSpacing: '-0.02em',
         },
         h4: {
-          fontSize: '2.15rem',
-          [breakpoints.down('md')]: {
-            fontSize: '1.75rem',
-          },
-          [breakpoints.down('sm')]: {
-            fontSize: '1.35rem',
-          },
+          fontWeight: 700,
+          letterSpacing: '-0.02em',
+        },
+        h5: {
+          fontWeight: 700,
+          letterSpacing: '-0.02em',
         },
       },
     },

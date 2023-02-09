@@ -1,3 +1,5 @@
+import { TuitionTracker } from '@/models';
+
 export enum HTTPMethod {
   GET = 'GET',
   POST = 'POST',
@@ -13,4 +15,8 @@ export interface TuitionROIRequest {
   budget: number;
   gpa: string;
   testScore: string;
+}
+
+export interface TuitionROIResponse {
+  data: Partial<TuitionTracker>;
 }

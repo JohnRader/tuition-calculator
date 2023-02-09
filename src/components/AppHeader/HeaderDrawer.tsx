@@ -10,7 +10,7 @@ import {
   SwipeableDrawer,
 } from '@mui/material';
 import { Home as HomeIcon, School as SchoolIcon, Calculate as CalculateIcon } from '@mui/icons-material';
-import { Route } from '@/types';
+import { Route } from '@/utils';
 
 const drawerList = (
   {

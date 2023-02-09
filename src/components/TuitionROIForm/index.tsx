@@ -62,12 +62,12 @@ export default function TuitionROIForm() {
     },
     [TuitionROIFormInput.GPA]: {
       step: TuitionROIFormStep.SCORES,
-      value: null,
+      value: '',
       errors: [],
     },
     [TuitionROIFormInput.TEST_SCORES]: {
       step: TuitionROIFormStep.SCORES,
-      value: null,
+      value: '',
       errors: [],
     },
   } as TuitionROIFormState);

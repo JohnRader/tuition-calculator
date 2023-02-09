@@ -8,8 +8,6 @@ export default function RootPage() {
       <Head>
         <title>Tuition ROI</title>
         <meta name="description" content="Tuition ROI" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <PageWrapper page={<TuitionROIForm />} />

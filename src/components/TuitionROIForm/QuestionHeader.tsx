@@ -31,7 +31,6 @@ export default function QuestionHeader({ questionId }: { questionId: TuitionROIF
       </Typography>),
     [TuitionROIFormStep.SCORES]: (
       <Typography variant="h5" gutterBottom>
-
         What is your
         {' '}
         <strong>GPA</strong>

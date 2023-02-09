@@ -115,19 +115,29 @@ export const formValidation = (state: TuitionROIFormState, action: TuitionROIFor
       };
 
     case TuitionROIFormStep.SCORES:
-      return {
-        ...state,
-        [TuitionROIFormInput.GPA]: {
-          ...state.gpa,
-          errors: validGPA(String(state.gpa.value)) ? [validGPA(String(state.gpa.value))] : [],
-        },
-        [TuitionROIFormInput.TEST_SCORES]: {
-          ...state.test_scores,
-          errors: validTestScore(String(state.test_scores.value))
-            ? [validTestScore(String(state.test_scores.value))]
-            : [],
-        },
-      };
+      if (state.gpa.value) {
+        return {
+          ...state,
+          [TuitionROIFormInput.GPA]: {
+            ...state.gpa,
+            errors: validGPA(String(state.gpa.value)) ? [validGPA(String(state.gpa.value))] : [],
+          },
+        };
+      }
+
+      if (state.test_scores.value) {
+        return {
+          ...state,
+          [TuitionROIFormInput.TEST_SCORES]: {
+            ...state.test_scores,
+            errors: validTestScore(String(state.test_scores.value))
+              ? [validTestScore(String(state.test_scores.value))]
+              : [],
+          },
+        };
+      }
+
+      return state;
 
     default:
       return state;

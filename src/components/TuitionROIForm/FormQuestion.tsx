@@ -15,7 +15,6 @@ import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { Edit } from '@mui/icons-material';
 
 import QuestionHeader from './QuestionHeader';
-import mui from '@/styles/mui.module.css';
 import {
   formatCurrency, isMobile, toTitleCase, EnumKeysToArray,
 } from '@/utils';
@@ -27,19 +26,6 @@ import {
   TuitionROIFormAction,
 
 } from '@/types';
-
-function classes(input: Exclude<TuitionROIFormInput, TuitionROIFormInput.IN_STATE>) {
-  const inputClasses: Record<Exclude<TuitionROIFormInput, TuitionROIFormInput.IN_STATE>, string> = {
-    [TuitionROIFormInput.UNIVERSITY]: `${mui['text-field--md']}`,
-    [TuitionROIFormInput.MAJOR]: `${mui['text-field--md']}`,
-    [TuitionROIFormInput.INCOME]: `${mui['text-field--sm']}`,
-    [TuitionROIFormInput.BUDGET]: `${mui['text-field--sm']}`,
-    [TuitionROIFormInput.GPA]: `${mui['text-field--sm']}`,
-    [TuitionROIFormInput.TEST_SCORES]: `${mui['text-field--sm']}`,
-  };
-
-  return inputClasses[input];
-}
 
 interface StepProps {
   form: TuitionROIFormState;
@@ -75,7 +61,6 @@ function UniversityStep({
         <Box display="flex" flexDirection="column" gap={4} width="100%" alignItems="center">
           <TextField
             id={TuitionROIFormInput.UNIVERSITY}
-            className={classes(TuitionROIFormInput.UNIVERSITY)}
             autoFocus
             fullWidth
             label="University"
@@ -92,7 +77,6 @@ function UniversityStep({
           />
           <TextField
             id={TuitionROIFormInput.MAJOR}
-            className={classes(TuitionROIFormInput.MAJOR)}
             fullWidth
             label="Major"
             variant="outlined"
@@ -181,7 +165,8 @@ function BudgetStep({
             </Typography>
           </Box>
 
-          <FormGroup sx={{ marginLeft: '1rem' }}>
+          <Typography variant="body1"> Are you currently living in the same state you will go to school? </Typography>
+          <FormGroup sx={{ marginLeft: '1rem', flexDirection: 'row' }}>
             <FormControlLabel
               sx={{
                 span: {
@@ -191,19 +176,38 @@ function BudgetStep({
               }}
               control={(
                 <Checkbox
-                  defaultChecked
                   value={form?.in_state.value}
+                  checked={Boolean(form?.in_state.value)}
                   onChange={(e) => dispatch({
                     type: TuitionROIFormAction.SET_FORM,
                     input: TuitionROIFormInput.IN_STATE,
-                    payload: e.target.checked,
+                    payload: true,
                   })}
                 />
               )}
-              label="Do you currently reside in the state you will be attending school?"
+              label="Yes"
+            />
+            <FormControlLabel
+              sx={{
+                span: {
+                  xs: { whiteSpace: 'normal' },
+                  md: { whiteSpace: 'nowrap' },
+                },
+              }}
+              control={(
+                <Checkbox
+                  value={form?.in_state.value}
+                  checked={Boolean(!form?.in_state.value)}
+                  onChange={(e) => dispatch({
+                    type: TuitionROIFormAction.SET_FORM,
+                    input: TuitionROIFormInput.IN_STATE,
+                    payload: false,
+                  })}
+                />
+              )}
+              label="No"
             />
           </FormGroup>
-
         </Box>
       </Card>
     </Slide>
@@ -232,7 +236,6 @@ function ScoresStep({
         <Box display="flex" flexDirection="column" gap={4} width="100%" alignItems="center">
           <TextField
             id={TuitionROIFormInput.GPA}
-            className={classes(TuitionROIFormInput.GPA)}
             autoFocus
             fullWidth
             label="GPA"
@@ -249,7 +252,6 @@ function ScoresStep({
           />
           <TextField
             id={TuitionROIFormInput.TEST_SCORES}
-            className={classes(TuitionROIFormInput.TEST_SCORES)}
             fullWidth
             label="ACT/SAT Score"
             variant="outlined"

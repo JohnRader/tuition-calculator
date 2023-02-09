@@ -5,8 +5,7 @@ import type { AppProps } from 'next/app';
 
 import { theme } from '@/styles/theme';
 import AppHeader from '@/components/AppHeader';
-import { Route } from '@/types';
-import { showHeader } from '@/utils';
+import { Route, showHeader } from '@/utils';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();

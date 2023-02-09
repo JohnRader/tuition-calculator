@@ -3,6 +3,18 @@
   border-left: 1px dashed grey;
 }
 
+.text-field--sm {
+  max-width: 380px;
+}
+
+.text-field--md {
+  max-width: 450px;
+}
+
+.text-field--lg {
+  max-width: 580px;
+}
+
 /* Mobile */
 @media (max-width: 700px) {
   .grid-item-with-separator:not(:first-of-type) {

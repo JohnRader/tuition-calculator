@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import PageWrapper from '@/components/PageWrapper';
-import { Route } from '@/types';
+import { Route } from '@/utils';
 
 export default function HomePage() {
   const router = useRouter();
@@ -14,8 +14,6 @@ export default function HomePage() {
       <Head>
         <title>Tuition Calculator</title>
         <meta name="description" content="Tuition Calculator" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <PageWrapper page={(
@@ -28,7 +26,7 @@ export default function HomePage() {
           gap={4}
         >
 
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h1" gutterBottom>
             App Name
           </Typography>
           <Typography variant="h3" gutterBottom>

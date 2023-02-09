@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { TuitionROIFormState } from '@/types';
-import { HTTPMethod } from '@/types/request';
+import { TuitionROIFormState, HTTPMethod } from '@/types';
 import {
   TuitionTracker, TuitionTrackerYearly, UsNews, PayscaleCollege, PayscaleMajor, MitLivingWage,
 } from '@/models';

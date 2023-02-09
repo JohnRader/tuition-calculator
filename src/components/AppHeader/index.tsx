@@ -6,7 +6,7 @@ import { useState, ReactElement, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { renderDrawer } from './HeaderDrawer';
-import { Route } from '@/types';
+import { Route } from '@/utils';
 
 function HideOnScroll({ children }: { children: ReactElement }) {
   const trigger = useScrollTrigger({

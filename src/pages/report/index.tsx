@@ -61,8 +61,9 @@ function ReportOverview({ results }: { results: ReportResults }) {
         }}
       >
         <Typography variant="h2" align="center"> Your Score </Typography>
-
-        <PieChart slices={ResultsChartData} />
+        <Box height="300px" display="flex">
+          <PieChart slices={ResultsChartData} />
+        </Box>
 
         <Typography variant="h6" component="h2">
           Based on your score, you will need to finance

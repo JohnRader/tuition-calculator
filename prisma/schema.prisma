@@ -1,0 +1,205 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model bls_occupations {
+  OWN_CODE  Int
+  OCC_CODE  String   @db.VarChar(7)
+  OCC_TITLE String   @db.VarChar(112)
+  O_GROUP   String   @db.VarChar(8)
+  TOT_EMP   Int
+  H_MEAN    Decimal? @db.Decimal(6, 2)
+  A_MEAN    Decimal? @db.Decimal(8, 1)
+  MEAN_PRSE Decimal? @db.Decimal(4, 1)
+  H_PCT10   Decimal? @db.Decimal(5, 2)
+  H_PCT25   Decimal? @db.Decimal(5, 2)
+  H_MEDIAN  Decimal? @db.Decimal(5, 2)
+  H_PCT75   Decimal? @db.Decimal(5, 2)
+  H_PCT90   Decimal? @db.Decimal(5, 2)
+  A_PCT10   Decimal? @db.Decimal(8, 1)
+  A_PCT25   Decimal? @db.Decimal(8, 1)
+  A_MEDIAN  Decimal? @db.Decimal(8, 1)
+  A_PCT75   Decimal? @db.Decimal(8, 1)
+  A_PCT90   Decimal? @db.Decimal(8, 1)
+
+  @@id([OWN_CODE, OCC_CODE, O_GROUP])
+}
+
+model mit_living_wage {
+  Food                                   Int
+  Child_Care                             Int
+  Medical                                Int
+  Housing                                Int
+  Transportation                         Int
+  Civic                                  Int
+  Other                                  Int
+  Required_annual_income_after_taxes     Int
+  Annual_taxes                           Int
+  Required_annual_income_before_taxes    Int
+  Management                             Int
+  Business_Financial_Operations          Int
+  Computer_Mathematical                  Int
+  Architecture_Engineering               Int
+  Life_Physical_Social_Science           Int
+  Community_Social_Service               Int
+  Legal                                  Int
+  Education_Training_Library             Int
+  Arts_Design_Entertainment_Sports_Media Int
+  Healthcare_Practitioners_Technical     Int
+  Healthcare_Support                     Int
+  Protective_Service                     Int
+  Food_Preparation_Serving_Related       Int
+  Building_Grounds_Cleaning_Maintenance  Int
+  Personal_Care_Service                  Int
+  Sales_Related                          Int
+  Office_Administrative_Support          Int
+  Farming_Fishing_Forestry               Int
+  Construction_Extraction                Int
+  Installation_Maintenance_Repair        Int
+  Production                             Int
+  Transportation_Material_Moving         Int
+  Living_Wage                            Decimal @db.Decimal(5, 2)
+  Minimum_Wage                           Decimal @db.Decimal(5, 2)
+  State                                  String  @db.VarChar(20)
+  Type                                   String  @db.VarChar(6)
+  Title                                  String  @db.VarChar(45)
+  Local                                  String  @db.VarChar(42)
+  File_Name                              String  @id @db.VarChar(20)
+}
+
+model payscale_college {
+  school_rank      Int
+  school           String  @id @db.VarChar(69)
+  link_to_school   String? @db.VarChar(115)
+  school_type      String  @db.VarChar(77)
+  early_career_pay Int
+  mid_career_pay   Int
+  high_meaning     String  @db.VarChar(3)
+  stem_percent     String  @db.VarChar(4)
+}
+
+model payscale_major {
+  major_rank       Int
+  major            String @id @db.VarChar(55)
+  degree_type      String @db.VarChar(9)
+  early_career_pay Int
+  mid_career_pay   Int
+  high_meaning     String @db.VarChar(3)
+}
+
+model roi_ids {
+  roi_id String  @id @db.VarChar(36)
+  tt_pk  Int?
+  us_pk  String? @db.VarChar(6)
+}
+
+model tuition_tracker {
+  unitid                               Int     @id
+  institution                          String  @db.VarChar(91)
+  alias                                String? @db.VarChar(387)
+  city                                 String  @db.VarChar(24)
+  abbreviation                         String  @db.VarChar(2)
+  lat                                  Decimal @db.Decimal(10, 6)
+  lon                                  Decimal @db.Decimal(11, 6)
+  hbcu                                 Int
+  tribal_college                       Int
+  level                                Int
+  enrollmentperc_sticker               Int
+  enrollmentperc_admitted              Int
+  enrollmentenrollment_unknown         Int
+  enrollmentenrollment_twomore         Int
+  enrollmentenrollment_white           Int
+  enrollmentenrollment_hisp            Int
+  enrollmentenrollment_nathawpacisl    Int
+  enrollmentenrollment_black           Int
+  enrollmentenrollment_asian           Int
+  enrollmentenrollment_amerindalasknat Int
+  enrollmentenrollment_nonresident     Int
+  enrollmenttotal_men                  Int
+  enrollmenttotal_women                Int
+  enrollmenttotal_enrollment           Int
+}
+
+model tuition_tracker_yearly {
+  year                                                String   @db.VarChar(5)
+  price_instate_oncampus                              Decimal? @db.Decimal(7, 1)
+  price_instate_offcampus_nofamily                    Decimal? @db.Decimal(8, 1)
+  avg_net_price_0_30000_titleiv_privateforprofit      Decimal? @db.Decimal(14, 8)
+  avg_net_price_30001_48000_titleiv_privateforprofit  Decimal? @db.Decimal(13, 7)
+  avg_net_price_48001_75000_titleiv_privateforprofit  Decimal? @db.Decimal(13, 7)
+  avg_net_price_75001_110000_titleiv_privateforprofit Decimal? @db.Decimal(13, 7)
+  avg_net_price_110001_titleiv_privateforprofit       Decimal? @db.Decimal(13, 7)
+  full_time_retention_rate                            Decimal? @db.Decimal(11, 8)
+  part_time_retention_rate                            Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_total                    Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_white                    Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_black                    Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_hisp                     Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_amerindalasknat          Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_unknown                  Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_asian                    Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_nathawpacisl             Decimal? @db.Decimal(12, 9)
+  grad_rate_associate_3years_twomore                  Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_total                    Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_white                    Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_black                    Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_hisp                     Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_amerindalasknat          Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_unknown                  Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_twomore                  Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_asian                    Decimal? @db.Decimal(12, 9)
+  grad_rate_bachelors_6years_nathawpacisl             Decimal? @db.Decimal(12, 9)
+  unitid                                              Int
+
+  @@id([year, unitid])
+}
+
+model usnews {
+  instate                 String?  @db.VarChar(5)
+  outofstate              String?  @db.VarChar(5)
+  ENROLLMENT_fall_2020    String?  @db.VarChar(6)
+  ENROLLMENT_fall_2021    String?  @db.VarChar(6)
+  Enrollment_UNKNOWN      String?  @db.VarChar(3)
+  Tuition                 String?  @db.VarChar(5)
+  blurb                   String?  @db.Text
+  aliasNames              String?  @db.VarChar(183)
+  city                    String?  @db.VarChar(26)
+  displayName             String   @db.VarChar(73)
+  heroImage               String?  @db.VarChar(5)
+  institutionalControl    String   @db.VarChar(11)
+  isPrimary               String   @db.VarChar(4)
+  isPublic                String   @db.VarChar(4)
+  linkedDisplayName       String   @db.VarChar(88)
+  metroId                 Int?
+  primaryKey              String   @id @db.VarChar(6)
+  primaryPhotoCardLarge   String?  @db.VarChar(252)
+  primaryPhotoCardSmall   String?  @db.VarChar(252)
+  primaryPhotoMedium      String?  @db.VarChar(252)
+  primaryPhotoThumb       String?  @db.VarChar(252)
+  rankingDisplayName      String   @db.VarChar(32)
+  rankingDisplayRank      String   @db.VarChar(8)
+  rankingDisplayScore     String?  @db.VarChar(10)
+  rankingIsTied           String   @db.VarChar(5)
+  rankingType             String   @db.VarChar(30)
+  region                  String?  @db.VarChar(7)
+  schoolType              String   @db.VarChar(30)
+  state                   String?  @db.VarChar(2)
+  zip                     String?  @db.VarChar(5)
+  acceptanceRate          Decimal? @db.Decimal(5, 1)
+  actAvg                  Decimal? @db.Decimal(4, 1)
+  businessRepScore        String?  @db.VarChar(5)
+  computerScienceRepScore String?  @db.VarChar(5)
+  costAfterAid            Decimal? @db.Decimal(7, 1)
+  engineeringRepScore     String?  @db.VarChar(5)
+  enrollment              Decimal? @db.Decimal(7, 1)
+  hsGpaAvg                Decimal? @db.Decimal(3, 1)
+  nursingRepScore         String?  @db.VarChar(5)
+  parentRank              String?  @db.VarChar(30)
+  percentReceivingAid     Decimal? @db.Decimal(4, 1)
+  satAvg                  Decimal? @db.Decimal(6, 1)
+}

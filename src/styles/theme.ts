@@ -116,30 +116,6 @@ export const theme = {
         },
       },
     },
-    MuiTypography: {
-      styleOverrides: {
-        h1: {
-          fontWeight: 900,
-          letterSpacing: '-0.02em',
-        },
-        h2: {
-          fontWeight: 900,
-          letterSpacing: '-0.02em',
-        },
-        h3: {
-          fontWeight: 800,
-          letterSpacing: '-0.02em',
-        },
-        h4: {
-          fontWeight: 700,
-          letterSpacing: '-0.02em',
-        },
-        h5: {
-          fontWeight: 700,
-          letterSpacing: '-0.02em',
-        },
-      },
-    },
     MuiGrid: {
       styleOverrides: {
         root: {

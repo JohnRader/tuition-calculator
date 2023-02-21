@@ -22,14 +22,12 @@ function HideOnScroll({ children }: { children: ReactElement }) {
 
 export default function AppHeader() {
   const [windowAfterSSR, setWindowAfterSSR] = useState<Window & typeof globalThis>();
+  const [drawerOpen, setdrawerOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     setWindowAfterSSR(window);
   }, []);
-
-  const router = useRouter();
-
-  const [drawerOpen, setdrawerOpen] = useState<boolean>(false);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
